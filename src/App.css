@@ -1,0 +1,12 @@
+.input:hover ,.input:focus {
+background-color: white;
+color: black;
+}
+.input:hover .searchIcon{
+  background-color: white;
+color: black;
+}
+/* .input:focus {
+background-color: white;
+color: black;
+} */
