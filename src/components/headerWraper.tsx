@@ -13,7 +13,9 @@ import {
   InputRightElement,
   Link,
   Switch,
+  Text,
   useDisclosure,
+  useMediaQuery,
   VStack,
 } from "@chakra-ui/react";
 import {
@@ -25,61 +27,82 @@ import {
   CloseIcon,
 } from "@chakra-ui/icons";
 
-import React, { useState } from "react";
-import { color } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { color, motion, wrap } from "framer-motion";
 
 const HeaderWraper = () => {
   const { isOpen, onToggle } = useDisclosure();
-  const [searchInput, setSearchInput] = useState('')
+  const [searchInput, setSearchInput] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [lgscreen] = useMediaQuery("(min-width: 978px)");
 
   return (
     <Box>
-      <Flex
-        display={"flex"}
-        align={"center"}
-        p={"24px 40px"}
-        justify={"space-between"}
-        flexWrap={"wrap"}
-      >
-        <Link
-          href="#"
-          fontSize={"xl"}
-          fontWeight={700}
-          _hover={{ textDecoration: "none" }}
-        >
-          RAWG
-        </Link>
-        <InputGroup mx={4} bg={"#3B3B3B"} maxW={"70vw"} borderRadius={"30px"}>
-          <InputLeftElement>
-            <SearchIcon color={"#898989"} />
-          </InputLeftElement>
-          <Input
+      <Flex display={"flex"} align={"center"} m={2} flexWrap={"wrap"} >
+        <HStack flexGrow={1} width={lgscreen ? "auto" : "100%"}>
+          <Link
+            href="#"
+            fontSize={"2xl"}
+            fontWeight={700}
+            _hover={{ textDecoration: "none" }}
+          >
+            RAWG
+          </Link>
+          <InputGroup
+            mx={4}
             bg={"#3B3B3B"}
-            color={"#898989"}
-            focusBorderColor="none"
             borderRadius={"30px"}
-            _hover={{ background: "#FFF", color: "#222" }}
-            _focus={{ background: "#FFF", color: "#222" }}
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-          />
-          <InputRightElement>
-            <CloseIcon
+            width={"100%"}
+            flexGrow={1}
+          >
+            <InputLeftElement>
+              <SearchIcon color={"#898989"} />
+            </InputLeftElement>
+            <Input
+              bg={"#3B3B3B"}
               color={"#898989"}
-              cursor={"pointer"}
-              onClick={() => {
-                setSearchInput("")       
-              
-              }}
+              focusBorderColor="none"
+              borderRadius={"30px"}
+              _hover={{ background: "#FFF", color: "#222" }}
+              _focus={{ background: "#FFF", color: "#222" }}
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              ref={inputRef}
             />
-          </InputRightElement>
-        </InputGroup>
-
-        <HamburgerIcon cursor={"pointer"} boxSize={8} onClick={onToggle} />
-        <Collapse in={isOpen} animateOpacity>
-          <Switch />
-        </Collapse>
+            <InputRightElement>
+              <CloseIcon
+                boxSize={lgscreen?3:2}
+                color={"#181818"}
+                cursor={"pointer"}
+                onClick={() => {
+                  setSearchInput("");
+                  inputRef.current?.focus();
+                }}
+              />
+            </InputRightElement>
+          </InputGroup>
+          <Switch colorScheme="green" />
+          <HamburgerIcon
+            cursor={"pointer"}
+            boxSize={8}
+            onClick={onToggle}
+            display={lgscreen ? "none" : "inline-block"}
+          />
+        </HStack>
+        <Box ml={"auto"}></Box>
       </Flex>
+      <Collapse in={isOpen} >
+        <VStack
+          m={2}
+          h={"90vh"}
+          p={"2rem"}
+          display={lgscreen ? "none" : "flex"}
+          background={"#FFF"}
+          color={'#000'}
+        >
+          <Heading>Genere</Heading>
+        </VStack>
+      </Collapse>
     </Box>
   );
 };

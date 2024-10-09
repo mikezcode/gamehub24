@@ -1,12 +1,19 @@
-.input:hover ,.input:focus {
-background-color: white;
-color: black;
-}
-.input:hover .searchIcon{
+.input:hover,
+.input:focus {
   background-color: white;
-color: black;
+  color: black;
 }
-/* .input:focus {
-background-color: white;
-color: black;
-} */
+.input:hover .searchIcon {
+  background-color: white;
+  color: black;
+}
+
+.collapsible-menu {
+  display: flex;
+  overflow: hidden;
+  padding: 2rem;
+  position: relative;
+  right: 0;
+  height: 90vh;
+  top: 0;
+}
