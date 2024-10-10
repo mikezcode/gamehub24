@@ -95,17 +95,12 @@ const HeaderWraper = () => {
       <Collapse in={isOpen}>
         <VStack
           m={2}
-          h={"90vh"}
+          minH={"90vh"}
           p={"2rem"}
           display={lgscreen ? "none" : "flex"}
-          background={"#FFF"}
-          color={"#000"}
-          alignItems={'start'}
+          alignItems={"start"}
         >
-          <Heading>Genres</Heading>
-          <Box >
-            <Genres />
-          </Box>
+          <Genres />
         </VStack>
       </Collapse>
     </Box>

@@ -15,7 +15,7 @@ const Genres = () => {
 
   return (
     <Box mx={2}>
-      <Heading fontSize={"24px"} fontWeight={700} color={"white"}>
+      <Heading fontSize={"24px"} fontWeight={700} color={"white"} mb={2}>
         Genres
       </Heading>
       {genres.map((genre) => (

@@ -10,8 +10,7 @@ import GameCard from "./components/game-card";
 function App() {
 
   const games = useGameService();
-  console.log(games.map(g=>console.log(g.platforms)
-  ));
+  console.log(games);
   
   
   

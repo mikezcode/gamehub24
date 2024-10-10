@@ -10,13 +10,15 @@ export interface Platform {
   };
 }
 
-export interface Game{
-  id:number,
-  name:string,
-  background_image:string,
-  genres:Genre[]
-  released:string
-  platforms:Platform[]
+export interface Game {
+  id: number;
+  name: string;
+  background_image: string;
+  genres: Genre[];
+  released: string;
+  platforms: Platform[];
+  suggestions_count:number
+  added:number
 }
 
 interface Games{
