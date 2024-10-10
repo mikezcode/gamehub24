@@ -95,9 +95,9 @@ const HeaderWraper = () => {
       <Collapse in={isOpen}>
         <VStack
           m={2}
-          minH={"90vh"}
           p={"2rem"}
           display={lgscreen ? "none" : "flex"}
+          transition={'1s ease-in all'}
           alignItems={"start"}
         >
           <Genres />

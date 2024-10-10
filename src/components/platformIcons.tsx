@@ -20,7 +20,7 @@ interface Props{
 
 function PlatformIcons( {platforms}:Props) {
   return (
-    <HStack>
+    <HStack gap={1}>
       {platforms.map(({ platform }) => {
         if (platform.name === "PC")
           return <FaWindows width={"12px"} key={platform.name} />;
