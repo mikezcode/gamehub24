@@ -2,12 +2,21 @@ import { useEffect, useState } from "react";
 import apiClient from "./api-client";
 import { Genre } from "./genre-service";
 
-interface Game{
+export interface Platform {
+  platform: {
+    id: number;
+    image_background: string;
+    name: string;
+  };
+}
+
+export interface Game{
   id:number,
   name:string,
   background_image:string,
   genres:Genre[]
   released:string
+  platforms:Platform[]
 }
 
 interface Games{

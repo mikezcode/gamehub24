@@ -5,10 +5,13 @@ import HeaderWraper from "./components/headerWraper";
 import Genres from "./components/genres";
 import useGenreService from "./services/genre-service";
 import useGameService from "./services/game-service";
+import PlatformIcons from "./components/platformIcons";
+import GameCard from "./components/game-card";
 function App() {
 
   const games = useGameService();
-  // console.log(games);
+  console.log(games.map(g=>console.log(g.platforms)
+  ));
   
   
   
@@ -16,6 +19,11 @@ function App() {
     <>
       <HeaderWraper />
 
+      <Stack align={"center"}>
+        {games.map((game) => (
+          <GameCard key={game.id} game={game} />
+        ))}
+      </Stack>
     </>
   );
 }
