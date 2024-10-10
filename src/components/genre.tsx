@@ -24,8 +24,10 @@ function Genre({ url, title }: Props) {
           borderRadius={"6px"}
           src={url}
           boxSize={"32px"}
+          objectFit={'cover'}
+          
         />
-        <Text fontWeight="bold" textDecoration={"none"}>
+        <Text fontWeight="500" textDecoration={"none"}>
           {title}
         </Text>
       </HStack>

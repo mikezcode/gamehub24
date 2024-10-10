@@ -29,6 +29,7 @@ import {
 
 import React, { useRef, useState } from "react";
 import { color, motion, wrap } from "framer-motion";
+import Genres from "./genres";
 
 const HeaderWraper = () => {
   const { isOpen, onToggle } = useDisclosure();
@@ -38,7 +39,7 @@ const HeaderWraper = () => {
 
   return (
     <Box>
-      <Flex display={"flex"} align={"center"} m={2} flexWrap={"wrap"} >
+      <Flex display={"flex"} align={"center"} m={2} flexWrap={"wrap"}>
         <HStack flexGrow={1} width={lgscreen ? "auto" : "100%"}>
           <Link
             href="#"
@@ -71,7 +72,7 @@ const HeaderWraper = () => {
             />
             <InputRightElement>
               <CloseIcon
-                boxSize={lgscreen?3:2}
+                boxSize={lgscreen ? 3 : 2}
                 color={"#181818"}
                 cursor={"pointer"}
                 onClick={() => {
@@ -91,16 +92,20 @@ const HeaderWraper = () => {
         </HStack>
         <Box ml={"auto"}></Box>
       </Flex>
-      <Collapse in={isOpen} >
+      <Collapse in={isOpen}>
         <VStack
           m={2}
           h={"90vh"}
           p={"2rem"}
           display={lgscreen ? "none" : "flex"}
           background={"#FFF"}
-          color={'#000'}
+          color={"#000"}
+          alignItems={'start'}
         >
-          <Heading>Genere</Heading>
+          <Heading>Genres</Heading>
+          <Box >
+            <Genres />
+          </Box>
         </VStack>
       </Collapse>
     </Box>
