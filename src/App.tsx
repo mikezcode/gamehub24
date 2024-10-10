@@ -1,20 +1,23 @@
-import { Box, Button, Text, useColorMode } from '@chakra-ui/react'
-import './App.css'
+import { Box, Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Image, List, ListItem, Stack, Text, useColorMode } from "@chakra-ui/react";
+import "./App.css";
 
-import HeaderWraper from './components/headerWraper';
-import Genres from './components/genres';
-import useGenreService from './services/genre-service';
+import HeaderWraper from "./components/headerWraper";
+import Genres from "./components/genres";
+import useGenreService from "./services/genre-service";
+import useGameService from "./services/game-service";
 function App() {
 
+  const games = useGameService();
+  // console.log(games);
   
-   
-  return (   
-
+  
+  
+  return (
     <>
-    <HeaderWraper/>
-    <Genres />    
+      <HeaderWraper />
+
     </>
   );
 }
 
-export default App
+export default App;
