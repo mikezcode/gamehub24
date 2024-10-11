@@ -7,10 +7,11 @@ import GameGrid from "./components/game-grid";
 import {
   Box,
   Container,
+  HStack,
   useColorModeValue,
   useMediaQuery,
 } from "@chakra-ui/react";
-import GameListoOrderControl from "./components/game-list-order-control";
+import GameListControl from "./components/game-list-control";
 function App() {
   const games = useGameService();
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
@@ -22,10 +23,16 @@ function App() {
   return (
     <>
       <HeaderWraper />
-      <Box width={"auto"} mx={"auto"}>
-        <GameListoOrderControl handleOrderBy={handleOrderBy} />
+      <HStack width={"50rem"} mx={"auto"}>
+        <Box alignSelf={"start"}>
+          <GameListControl
+            handleOrderBy={handleOrderBy}
+            handlePlatform={(l) => console.log(l)}
+          />
+        </Box>
+
         {/* <GameGrid games={games} /> */}
-      </Box>
+      </HStack>
     </>
   );
 }
