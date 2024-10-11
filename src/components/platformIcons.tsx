@@ -13,12 +13,21 @@ import { MdOutlinePhoneIphone } from "react-icons/md";
 import { RiNetflixFill } from "react-icons/ri";
 import { Platform } from "../services/game-service";
 // import { Platform } from "../service/game-service";
-interface Props{
-  platforms:Platform[]
+interface Props {
+  platforms: Platform[];
 }
+export const platformTypes = [
+  "PC",
+  "PlayStation 3",
+  "Xbox 360",
+  "ios",
+  "Android",
+  "macOS",
+  "Linux",
+  "Nintendo Switch",
+];
 
-
-function PlatformIcons( {platforms}:Props) {
+function PlatformIcons({ platforms }: Props) {
   return (
     <HStack gap={1}>
       {platforms.map(({ platform }) => {
