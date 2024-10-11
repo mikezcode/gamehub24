@@ -82,7 +82,7 @@ const HeaderWraper = () => {
                 outline: "none",
                 outlineOffset: "0px",
                 outlineColor: "#f2f2f2",
-                border: "10px solid #f2f2f2",
+                border: "none",
                 overflow: "hidden",
               }}
               value={searchInput}
