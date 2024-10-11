@@ -14,6 +14,8 @@ import {
   Link,
   Switch,
   Text,
+  useColorMode,
+  useColorModeValue,
   useDisclosure,
   useMediaQuery,
   VStack,
@@ -36,6 +38,8 @@ const HeaderWraper = () => {
   const [searchInput, setSearchInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
+  const { toggleColorMode } = useColorMode();
+  const bg = useColorModeValue("#D1D2D5", "#2D3748");
 
   return (
     <Box>
@@ -51,21 +55,36 @@ const HeaderWraper = () => {
           </Link>
           <InputGroup
             mx={4}
-            bg={"#3B3B3B"}
+            bg={bg}
             borderRadius={"30px"}
             width={"100%"}
             flexGrow={1}
+            outlineOffset={"0px"}
+            boxShadow={"lg"}
           >
             <InputLeftElement>
-              <SearchIcon color={"#898989"} />
+              <SearchIcon color={"#181818"} />
             </InputLeftElement>
             <Input
-              bg={"#3B3B3B"}
+              bg={bg}
               color={"#898989"}
-              focusBorderColor="none"
               borderRadius={"30px"}
-              _hover={{ background: "#FFF", color: "#222" }}
-              _focus={{ background: "#FFF", color: "#222" }}
+              border={"none"}
+              outline={"none"}
+              _hover={{
+                background: "#F2F2F2",
+                color: "#222",
+                outline: "none",
+              }}
+              _focus={{
+                background: "#F2F2F2",
+                color: "#222",
+                outline: "none",
+                outlineOffset: "0px",
+                outlineColor: "#f2f2f2",
+                border: "10px solid #f2f2f2",
+                overflow: "hidden",
+              }}
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               ref={inputRef}
@@ -82,7 +101,7 @@ const HeaderWraper = () => {
               />
             </InputRightElement>
           </InputGroup>
-          <Switch colorScheme="green" />
+          <Switch colorScheme="green" onChange={toggleColorMode} />
           <HamburgerIcon
             cursor={"pointer"}
             boxSize={8}
@@ -97,7 +116,7 @@ const HeaderWraper = () => {
           m={2}
           p={"2rem"}
           display={lgscreen ? "none" : "flex"}
-          transition={'1s ease-in all'}
+          transition={"1s ease-in all"}
           alignItems={"start"}
         >
           <Genres />

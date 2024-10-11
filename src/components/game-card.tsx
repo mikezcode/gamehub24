@@ -1,38 +1,43 @@
 import {
-  Stack,
   Card,
   Heading,
   Image,
   CardBody,
   HStack,
   Badge,
-  Flex,
+  useColorModeValue,
 } from "@chakra-ui/react";
-import { MdAdd } from "react-icons/md";
-import { Game, Platform } from "../services/game-service";
+import { Game } from "../services/game-service";
 import PlatformIcons from "./platformIcons";
 import { AddIcon } from "@chakra-ui/icons";
-import { IoMdAdd } from "react-icons/io";
+
 interface Props {
   game: Game;
 }
 function GameCard({ game }: Props) {
+    
+  // const color = useColorModeValue('whiteAlpha300','blackAlpha300')
+  // const bg = useColorModeValue("#F2F2F2", "#2C313D");
+
+
   return (
     <Card
       maxW="480px"
-      w={'23rem'}
-      height={'fit-content'}
+      w={"23rem"}
+      height={"fit-content"}
       m={"10px"}
-      alignSelf={'start'}
+      alignSelf={"start"}
       // _hover={{ transform: "scale(1.09)", transition: "0.8s ease all" }}
       boxSizing="border-box"
       display={"flex"}
       flexDirection={"column"}
+      // backgroundColor={bg}
+      boxShadow={'xl'}
     >
-      <Image        
+      <Image
         h={"15rem"}
-        objectFit={'cover'}
-        objectPosition={'top'}
+        objectFit={"cover"}
+        objectPosition={"top"}
         src={game.background_image}
         alt=""
         borderTopRadius="lg"
