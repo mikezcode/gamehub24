@@ -1,14 +1,6 @@
-import {
-  AvatarBadge,
-  Badge,
-  Box,
-  Heading,
-  List,
-  ListItem,
-} from "@chakra-ui/react";
-import React from "react";
+import { Box, Heading } from "@chakra-ui/react";
 import Genre from "./genre";
-import useGenreService from "../services/genre-service";
+import useGenreService from "../hook/useGenreService";
 
 const Genres = () => {
   const { genres, err } = useGenreService();

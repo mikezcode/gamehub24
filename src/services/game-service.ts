@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import apiClient from "./api-client";
+
 import { Genre } from "./genre-service";
+import createService from "./http-service";
 
 export interface Platform {
   platform: {
@@ -20,24 +20,5 @@ export interface Game {
   suggestions_count:number
   added:number
 }
-
-interface Games{
-  results:Game[]
-}
-
-const useGameService = ()=>{
- const [games, setGames] = useState<Game[]>([])
-useEffect(()=>{
-  const controller =  new AbortController ();
-    apiClient
-      .get<Games>("/games", { signal: controller.signal })
-      .then(({data}) => {
-        setGames(data.results);
-
-      })
-      .catch((err) => console.log(err));
-    
-},[])
- return games;
-}
-export default useGameService;
+const gameService = createService<Game>('/games')
+export default gameService;
