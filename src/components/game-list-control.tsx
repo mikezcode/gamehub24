@@ -3,14 +3,17 @@ import {
   Box,
   Button,
   Collapse,
+  Flex,
   HStack,
   List,
   ListItem,
   Text,
   useDisclosure,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { platformTypes } from "./platformIcons";
+import { wrap } from "framer-motion";
 
 interface Props {
   handleOrderBy: (option: string) => void;
@@ -21,6 +24,8 @@ function GameListControl({ handleOrderBy, handlePlatform }: Props) {
   const { isOpen: isOrderOpen, onToggle: onOrderToggle } = useDisclosure();
   const { isOpen: isPlatformOpen, onToggle: onPlatformToggle } =
     useDisclosure();
+    
+  const [lgscreen] = useMediaQuery("(min-width: 978px)");
 
   const [selectOrderOption, setSelectOrderOption] = useState("Popularity");
   const [selectPlatformOption, setSelectPlatformOption] = useState("");
@@ -39,7 +44,7 @@ function GameListControl({ handleOrderBy, handlePlatform }: Props) {
     if (isPlatformOpen) onPlatformToggle();
   };
   return (
-    <HStack>
+    <Flex my={5}  mx={'auto'} flexWrap={'wrap'} gap={2}  justify={lgscreen?'start':'center'}>
       <Box width={"max-content"} alignSelf={"start"}>
         <Button
           onClick={() => {
@@ -148,7 +153,7 @@ function GameListControl({ handleOrderBy, handlePlatform }: Props) {
           </List>
         </Collapse>
       </Box>
-    </HStack>
+    </Flex>
   );
 }
 

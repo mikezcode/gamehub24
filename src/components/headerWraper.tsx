@@ -42,7 +42,7 @@ const HeaderWraper = () => {
   const bg = useColorModeValue("#D1D2D5", "#2D3748");
 
   return (
-    <Box>
+    <Box p={'24px 40px'}>
       <Flex display={"flex"} align={"center"} m={2} flexWrap={"wrap"}>
         <HStack flexGrow={1} width={lgscreen ? "auto" : "100%"}>
           <Link

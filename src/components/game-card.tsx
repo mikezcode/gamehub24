@@ -22,13 +22,14 @@ function GameCard({ game }: Props) {
 
   return (
     <Card
-      maxW="480px"
-      w={"23rem"}
+      maxW="449px"
+      w={"100%"}
       height={"fit-content"}
       m={"10px"}
-      alignSelf={"start"}
+      // alignSelf={"start"}
+      
       // _hover={{ transform: "scale(1.09)", transition: "0.8s ease all" }}
-      boxSizing="border-box"
+     
       display={"flex"}
       flexDirection={"column"}
       // backgroundColor={bg}

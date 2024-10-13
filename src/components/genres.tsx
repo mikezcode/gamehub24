@@ -6,7 +6,7 @@ const Genres = () => {
   const { genres, err } = useGenreService();
 
   return (
-    <Box mx={2}>
+    <Box mr={5}>
       <Heading fontSize={"24px"} fontWeight={700} color={"white"} mb={2}>
         Genres
       </Heading>
