@@ -13,12 +13,13 @@ import React from "react";
 interface Props {
   url: string;
   title: string;
+  handleGenre:(genre:string)=> void
 }
 
-function Genre({ url, title }: Props) {
+function Genre({ url, title,handleGenre }: Props) {
   return (
-    <Link _hover={{ textDecoration: "none" }}>
-      <HStack align={"center"} mb={2}>
+    <Link _hover={{ textDecoration: "none" }} onClick={()=>handleGenre(title)}>
+      <HStack align={"center"} mb={3}>
         <Image
           borderColor={"none"}
           borderRadius={"6px"}

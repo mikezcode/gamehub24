@@ -20,20 +20,20 @@ import {
   useMediaQuery,
   VStack,
 } from "@chakra-ui/react";
-import {
-  PhoneIcon,
-  AddIcon,
-  WarningIcon,
+import {  
   HamburgerIcon,
   SearchIcon,
   CloseIcon,
 } from "@chakra-ui/icons";
 
-import React, { useRef, useState } from "react";
-import { color, motion, wrap } from "framer-motion";
+import  { ReactNode, useRef, useState } from "react";
 import Genres from "./genres";
 
-const HeaderWraper = () => {
+interface Props{
+  children:ReactNode
+}
+
+const HeaderWraper = ({children}:Props) => {
   const { isOpen, onToggle } = useDisclosure();
   const [searchInput, setSearchInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -42,7 +42,7 @@ const HeaderWraper = () => {
   const bg = useColorModeValue("#D1D2D5", "#2D3748");
 
   return (
-    <Box p={'24px 40px'}>
+    <Box p={'24px 15px'}>
       <Flex display={"flex"} align={"center"} m={2} flexWrap={"wrap"}>
         <HStack flexGrow={1} width={lgscreen ? "auto" : "100%"}>
           <Link
@@ -119,7 +119,7 @@ const HeaderWraper = () => {
           transition={"1s ease-in all"}
           alignItems={"start"}
         >
-          <Genres />
+          {children}
         </VStack>
       </Collapse>
     </Box>

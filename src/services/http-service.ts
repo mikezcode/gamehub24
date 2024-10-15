@@ -5,12 +5,13 @@ class HttpService<T> {
   constructor(endpoint: string) {
     this.endpoint = endpoint;
   }
- getAll(){
-  const controller = new AbortController();
-  const req=  apiClient .get<{results:T[]}>(this.endpoint,{signal:controller.signal});
-  return {req, cancel:()=> controller.abort()}            
- }
-
+  getAll() {
+    const controller = new AbortController();
+    const req = apiClient.get<{ results: T[] }>(this.endpoint, {
+      signal: controller.signal,
+    });
+    return { req, cancel: () => controller.abort() };
+  }
 }
-const createService = <T>(endpoint:string) => new HttpService<T>(endpoint);
-export default createService
+const createService = <T>(endpoint: string) => new HttpService<T>(endpoint);
+export default createService;

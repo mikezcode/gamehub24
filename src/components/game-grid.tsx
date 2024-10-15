@@ -10,7 +10,7 @@ function GameGrid({ games }: Props) {
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
   return (
     <Grid
-      justifyContent={"center"}
+      justifyContent={"start"}
       justifyItems={"center"}
       templateColumns={
         lgscreen ? "repeat(auto-fit, minmax(350px, auto))" : "1fr"
