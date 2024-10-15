@@ -20,14 +20,23 @@ function App() {
   const { games, isLoading, setGames, err } = useGameService();
   // const [filteredGame, setFilteredGame] = useState(games);
   const [genre, setGenre] = useState("");
-  const [lgscreen] = useMediaQuery("(min-width: 978px)"); 
+  const [label, setLabel] = useState("Popularity")
+  const [lgscreen] = useMediaQuery("(min-width: 978px)");
 
-  const filteredGame = genre
+  let filteredGame = genre
     ? games.filter((game) => {
         return game.genres.filter((g) => g.name === genre).length > 0;
       })
     : games;
 
+  const filteredByOrder = (orderBy: string) => {
+   
+    setLabel(orderBy)
+    if(orderBy==='Name'){
+      filteredGame.sort((g1,g2)=>g1.name.localeCompare(g2.name))
+    }
+   
+  };
   return (
     <>
       <HeaderWraper>
@@ -54,7 +63,7 @@ function App() {
             </Heading>
 
             <GameListControl
-              handleOrderBy={(e) => console.log(e)}
+              handleOrderBy={(orderBy) => filteredByOrder(orderBy)}
               handlePlatform={(e) => console.log(e)}
             />
             {filteredGame.length === 0 && (
