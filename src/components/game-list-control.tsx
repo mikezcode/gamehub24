@@ -18,6 +18,7 @@ import { wrap } from "framer-motion";
 interface Props {
   handleOrderBy: (option: string) => void;
   handlePlatform: (option: string) => void;
+  // resetToDefault:boolean
 }
 
 function GameListControl({ handleOrderBy, handlePlatform }: Props) {

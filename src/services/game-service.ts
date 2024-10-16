@@ -19,6 +19,7 @@ export interface Game {
   platforms: Platform[];
   suggestions_count:number
   added:number
+  rating:number
 }
 const gameService = createService<Game>('/games')
 export default gameService;
