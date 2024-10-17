@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import genreService, { Genre } from "../services/genre-service";
 import { tr } from "framer-motion/client";
+import { CanceledError } from "axios";
 
-const useGenreService = () => {
+const useGenre = () => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [err, setErr] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -12,16 +13,17 @@ const useGenreService = () => {
     req
       .then(({ data }) => {
         setGenres(data.results);
-        setIsLoading(false)
+        setIsLoading(false);
       })
-      .catch((err: { name: string }) => {
-        if (err.name !== "CanceledError") setErr(err.name);
+      .catch(err => {
+        if (err instanceof CanceledError) return;
+        setErr(err.name);
         setIsLoading(false);
       });
 
     return () => cancel();
   }, []);
 
-  return { genres, err,isLoading };
+  return { genres, err, isLoading };
 };
-export default useGenreService;
+export default useGenre;

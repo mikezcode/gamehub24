@@ -15,28 +15,18 @@ interface Props {
   game: Game;
 }
 function GameCard({ game }: Props) {
-    
-  // const color = useColorModeValue('whiteAlpha300','blackAlpha300')
-  // const bg = useColorModeValue("#F2F2F2", "#2C313D");
-
-
+ 
   return (
     <Card
-    className="video-card"
-      maxW="449px"
+      maxW={"449px"}
       w={"100%"}
-      // minW={'230px'}
       height={"fit-content"}
-      m={"10px"}
-      // alignSelf={"start"}
-      
-      // _hover={{ transform: "scale(1.09)", transition: "0.8s ease all" }}
-     
+      // m={"10px"}
       display={"flex"}
       flexDirection={"column"}
-      // backgroundColor={bg}
-      boxShadow={'xl'}
-      
+      boxShadow={"xl"}
+      borderRadius="lg"
+      overflow={'hidden'}
     >
       <Image
         h={"15rem"}
@@ -44,7 +34,6 @@ function GameCard({ game }: Props) {
         objectPosition={"top"}
         src={game.background_image}
         alt=""
-        borderTopRadius="lg"
       />
       <CardBody flexGrow={1}>
         <HStack justify={"space-between"}>
