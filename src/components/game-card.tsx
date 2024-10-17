@@ -27,6 +27,9 @@ function GameCard({ game }: Props) {
       boxShadow={"xl"}
       borderRadius="lg"
       overflow={'hidden'}
+      boxShadow={"xl"}
+      borderRadius="lg"
+      overflow={'hidden'}
     >
       <Image
         h={"15rem"}

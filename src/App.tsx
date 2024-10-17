@@ -5,11 +5,10 @@ import {
   Box,
   Heading,
   SimpleGrid,
-  Spinner,
   useMediaQuery,
-  VStack,
 } from "@chakra-ui/react";
 import GameListControl from "./components/game-list-control";
+import useGame from "./hook/use-Game";
 
 import GameGrid from "./components/game-grid";
 import Genres from "./components/genres";
@@ -37,6 +36,7 @@ function App() {
       : g2.rating - g1.rating
   );
 
+  
   const handlGenre = (gType: string) => {
     setGenre(gType);
     setOrderBy("Popularity");
