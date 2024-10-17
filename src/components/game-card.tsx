@@ -22,8 +22,10 @@ function GameCard({ game }: Props) {
 
   return (
     <Card
+    className="video-card"
       maxW="449px"
       w={"100%"}
+      // minW={'230px'}
       height={"fit-content"}
       m={"10px"}
       // alignSelf={"start"}
@@ -34,6 +36,7 @@ function GameCard({ game }: Props) {
       flexDirection={"column"}
       // backgroundColor={bg}
       boxShadow={'xl'}
+      
     >
       <Image
         h={"15rem"}

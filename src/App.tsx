@@ -21,80 +21,50 @@ import { useEffect, useState } from "react";
 function App() {
   const { games, isLoading, setGames, err } = useGameService();
 
-  const [filteredGame, setFilteredGame] = useState<Game[]>([]);
-  // useEffect(() => {
-  //   setFilteredGame([...games]);
-  // }, []);
-
   const [genre, setGenre] = useState("");
-  const [label, setLabel] = useState("Popularity");
+  const [orderBy, setOrderBy] = useState("Popularity");
+  const [platform, setPlatform] = useState("");
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
 
-  useEffect(() => {
-    setFilteredGame(
-      genre
-        ? games.filter((game) => {
-            return game.genres.filter((g) => g.name === genre).length > 0;
-          })
-        : games
-    );
-  }, [genre]);
+  const filteredGame = genre
+    ? games
+        .filter((game) => {
+          return game.genres.filter((g) => g.name === genre).length > 0;
+        })
+        : games;
+    
 
-  const filteredByOrder = (orderBy: string) => {
-   setLabel((l) => orderBy);
-    switch (orderBy) {
-      case "Name":
-        setFilteredGame(
-          filteredGame.sort((g1, g2) => g1.name.localeCompare(g2.name))
-        );
-        break;
-      case "Popularity":
-        setFilteredGame(filteredGame.sort((g1, g2) => g2.added - g1.added));
-        break;
+       filteredGame .sort((g1, g2) =>
+          orderBy === "Name"
+            ? g1.name.localeCompare(g2.name)
+            : orderBy === "Popularity"
+            ? g2.added - g1.added
+            : g2.rating - g1.rating
+        )
 
-      case "Average rating":
-        setFilteredGame(filteredGame.sort((g1, g2) => g2.rating - g1.rating));
-        break;
-    }
- 
-  };
-
-  useEffect(() => {
-    setFilteredGame([...games]);
-  }, [isLoading]);
-
-//  const handleResetOrder = (isReset:boolean)=>{
-//   console.log('called',isReset);
-  
-//    return isReset;
-//  }
-
+  const  handlGenre =(gType: string)=> {
+    setGenre(gType);
+    setOrderBy('Popularity')
+  }
+  const handleOrderBy = (orderType:string)=>{
+    setOrderBy(orderType)
+  }
+  const handlePlatform = (platformType:string)=>{
+    setPlatform(platformType)
+  }
 
   return (
     <>
       <HeaderWraper>
-        <Genres
-          handleGenre={(g) => {
-            setGenre(g);
-            // handleResetOrder(true)
-            // filteredByGenre(g);
-          }}
-        />
+        <Genres handleGenre={handlGenre} />
       </HeaderWraper>
       <SimpleGrid
         columns={lgscreen ? 2 : 1}
-        templateColumns={lgscreen ? "200px 1fr" : "1fr"}
+        templateColumns={lgscreen ? "220px 1fr" : "1fr"}
         px={"15px"}
       >
-        {lgscreen ? (
-          <Genres
-            handleGenre={(gType) => {
-              setGenre(gType);
-            }}
-          />
-        ) : (
-          <></>
-        )}
+       
+        {lgscreen ? <Genres handleGenre={handlGenre} /> : <></>}
         <SimpleGrid templateRows={"auto auto"} ml={0} alignContent={"start"}>
           <Box>
             <Heading fontSize={"5xl"} textAlign={lgscreen ? "left" : "center"}>
@@ -102,9 +72,9 @@ function App() {
             </Heading>
 
             <GameListControl
-              handleOrderBy={(orderBy) => filteredByOrder(orderBy)}
-              handlePlatform={(e) => console.log(e)}
-              // resetToDefault = {handleResetOrder(false)}
+              handleOrderBy={handleOrderBy}
+              handlePlatform={handlePlatform}
+              orderBy={orderBy}
             />
             {filteredGame.length === 0 && (
               <Heading mt={10}>

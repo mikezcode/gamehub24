@@ -14,7 +14,7 @@ const Genres = ({handleGenre}:Props) => {
   }
 
   return (
-    <Box mr={5}>
+    <Box >
       <Link _hover={{ textDecor: "none" }} onClick={() => handleGenre("")} >
         <Heading fontSize={"24px"} fontWeight={700} color={"white"} mb={4}>
           Genres

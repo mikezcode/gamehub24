@@ -13,16 +13,13 @@ function GameGrid({ games }: Props) {
       justifyContent={"start"}
       justifyItems={"center"}
       templateColumns={
-        lgscreen ? "repeat(auto-fit, minmax(350px, auto))" : "1fr"
+        lgscreen ? "repeat(auto-fit, minmax(225px, auto))" : "1fr"
       }
-      
       gridGap={"0 24px"}
     >
-     
-        {games.map((game) => (
-          <GameCard key={game.id} game={game} />
-        ))}
-   
+      {games.map((game) => (
+        <GameCard key={game.id} game={game} />
+      ))}
     </Grid>
   );
 }
