@@ -8,7 +8,8 @@ import useGame from "./hook/use-Game";
 import GameGrid from "./components/game-grid";
 import Genres from "./components/genres";
 import { Game } from "./services/game-service";
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
+import { input } from "framer-motion/client";
 function App() {
   const [data, setData] = useState<Game[]>([]);
 
@@ -18,21 +19,21 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
 
-  let filteredGame =
-    genre || searchInput
+  let filteredGame = (
+    genre || searchInput || platform
       ? data.filter((game) => {
           return (
-            (game.genres.filter((g) => g.name === genre || genre === "").length !== 0) &&
-            (game.name.toLowerCase().includes(searchInput.toLowerCase().trim())) &&
-            console.log(platform)
-            
+            (genre === "" ||
+              game.genres.filter((g) => g.name === genre).length !== 0) &&
+            (searchInput === "" ||
+              game.name.toLowerCase().includes(searchInput)) &&
+            (platform === "" ||
+              game.platforms.filter((g) => g.platform.name === platform)
+                .length !== 0)
           );
         })
-      : data;
-
- 
-
-  filteredGame.sort((g1, g2) =>
+      : data
+  ).sort((g1, g2) =>
     orderBy === "Name"
       ? g1.name.localeCompare(g2.name)
       : orderBy === "Popularity"
@@ -43,20 +44,21 @@ function App() {
   const handlGenre = (gType: string) => {
     setGenre(gType);
     setOrderBy("Popularity");
+    setPlatform("");
     setSearchInput("");
   };
 
-  const handleOrderBy = (orderType: string) => {
-    setOrderBy(orderType);
-  };
 
-  const handlePlatform = (platformType: string) => {
-    setPlatform(platformType);
-  };
+  // const handleOrderBy = (orderType: string) => setOrderBy(orderType);
+
+  // const handlePlatform = (platformType: string) => setPlatform(platformType);
 
   return (
     <>
-      <HeaderWraper handleSearch={(input) => setSearchInput(input)}>
+      <HeaderWraper
+        handleSearch={(input) => setSearchInput(input.toLowerCase().trim())}
+        sInput={searchInput}
+      >
         <Genres handleGenre={handlGenre} />
       </HeaderWraper>
       <SimpleGrid
@@ -72,9 +74,12 @@ function App() {
             </Heading>
 
             <GameListControl
-              handleOrderBy={handleOrderBy}
-              handlePlatform={handlePlatform}
+              handleOrderBy={(orderType: string) => setOrderBy(orderType)}
+              handlePlatform={(platformType: string) =>
+                setPlatform(platformType)
+              }
               orderBy={orderBy}
+              platform={platform}
             />
           </Box>
           {

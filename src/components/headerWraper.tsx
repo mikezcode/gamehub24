@@ -22,15 +22,16 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, SearchIcon, CloseIcon } from "@chakra-ui/icons";
 
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode, RefObject, useEffect, useRef, useState } from "react";
 import Genres from "./genres";
 
 interface Props {
   children: ReactNode;
-  handleSearch: (searchText: string ) => void;
+  handleSearch: (searchText: string) => void;
+  sInput: string;
 }
 
-const HeaderWraper = ({ children, handleSearch }: Props) => {
+const HeaderWraper = ({ children, handleSearch,sInput }: Props) => {
   const { isOpen, onToggle } = useDisclosure();
   const [searchInput, setSearchInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -41,6 +42,10 @@ const HeaderWraper = ({ children, handleSearch }: Props) => {
   // inputRef.current?.addEventListener('keydown',e=>{
   //  if(e.key==='Enter') handleSearch(searchInput)
   // })
+  
+  useEffect(() => {
+    setSearchInput(sInput)
+  });
 
   return (
     <Box p={"24px 15px"}>

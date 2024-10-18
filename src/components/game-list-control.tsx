@@ -18,10 +18,11 @@ import { wrap } from "framer-motion";
 interface Props {
   handleOrderBy: (option: string) => void;
   handlePlatform: (option: string) => void;
-  orderBy:string
+  orderBy:string;
+  platform:string;
 }
 
-function GameListControl({ handleOrderBy, handlePlatform,orderBy }: Props) {
+function GameListControl({ handleOrderBy, handlePlatform,orderBy,platform }: Props) {
   const { isOpen: isOrderOpen, onToggle: onOrderToggle } = useDisclosure();
   const { isOpen: isPlatformOpen, onToggle: onPlatformToggle } =
     useDisclosure();
@@ -40,6 +41,7 @@ function GameListControl({ handleOrderBy, handlePlatform,orderBy }: Props) {
 
  useEffect (()=>{
  setSelectOrderOption(orderBy); 
+ setSelectPlatformOption(platform)
  })
   
   const handleOrderSelect = (option: string) => {
