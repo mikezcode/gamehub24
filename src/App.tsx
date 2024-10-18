@@ -18,17 +18,19 @@ function App() {
   const [platform, setPlatform] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
-
+  
+  
   let filteredGame = (
     genre || searchInput || platform
       ? data.filter((game) => {
+       
           return (
             (genre === "" ||
               game.genres.filter((g) => g.name === genre).length !== 0) &&
             (searchInput === "" ||
               game.name.toLowerCase().includes(searchInput)) &&
             (platform === "" ||
-              game.platforms.filter((g) => g.platform.name === platform)
+              game.parent_platforms.filter((_platform) => platform.toLowerCase().includes( _platform.platform.slug))
                 .length !== 0)
           );
         })
@@ -47,11 +49,6 @@ function App() {
     setPlatform("");
     setSearchInput("");
   };
-
-
-  // const handleOrderBy = (orderType: string) => setOrderBy(orderType);
-
-  // const handlePlatform = (platformType: string) => setPlatform(platformType);
 
   return (
     <>

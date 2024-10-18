@@ -11,22 +11,41 @@ import {
   useDisclosure,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useImperativeHandle, useState } from "react";
 import { platformTypes } from "./platformIcons";
 import { wrap } from "framer-motion";
+import React from "react";
 
 interface Props {
   handleOrderBy: (option: string) => void;
   handlePlatform: (option: string) => void;
-  orderBy:string;
-  platform:string;
+  orderBy: string;
+  platform: string;
 }
 
-function GameListControl({ handleOrderBy, handlePlatform,orderBy,platform }: Props) {
+const platformType = [
+  "PC",
+  "PlayStation",
+  "Xbox",
+  "Ios",
+  "Android",
+  "MacOS",
+  "Linux",
+  "Nintendo Switch",
+];
+
+//
+
+function GameListControl({
+  handleOrderBy,
+  handlePlatform,
+  orderBy,
+  platform,
+}: Readonly<Props>) {
   const { isOpen: isOrderOpen, onToggle: onOrderToggle } = useDisclosure();
   const { isOpen: isPlatformOpen, onToggle: onPlatformToggle } =
     useDisclosure();
-    
+
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
 
   const [selectOrderOption, setSelectOrderOption] = useState("Popularity");
@@ -38,14 +57,16 @@ function GameListControl({ handleOrderBy, handlePlatform,orderBy,platform }: Pro
     onPlatformToggle();
     if (isOrderOpen) onOrderToggle();
   };
-
- useEffect (()=>{
- setSelectOrderOption(orderBy); 
- setSelectPlatformOption(platform)
- })
   
+  useEffect(() => {    
+    setSelectOrderOption(orderBy);
+    setSelectPlatformOption(platform);
+  });
+
+
+   
+
   const handleOrderSelect = (option: string) => {
-    
     setSelectOrderOption(option);
     handleOrderBy(option);
     onOrderToggle();
@@ -136,39 +157,40 @@ function GameListControl({ handleOrderBy, handlePlatform,orderBy,platform }: Pro
           </HStack>
         </Button>
         <Box position={"absolute"} zIndex={10}>
-        <Collapse in={isPlatformOpen} animateOpacity>
-          <List
-            bg={"white"}
-            width={"100%"}
-            color={"blackAlpha.800"}
-            p={"15px"}
-            rounded={"sm"}
-          >
-            <ListItem
-              color={"red"}
-              p={"5px 10px"}
-              _hover={{ textDecor: "underline", cursor: "pointer" }}
-              onClick={() => handlePlatformSelect("")}
+          <Collapse in={isPlatformOpen} animateOpacity>
+            <List
+              bg={"white"}
+              width={"100%"}
+              color={"blackAlpha.800"}
+              p={"15px"}
+              rounded={"sm"}
             >
-              clear
-            </ListItem>
-            {platformTypes.map((platform) => (
               <ListItem
-                key={platform}
-                _hover={{ background: "#f3f3f3" }}
+                color={"red"}
                 p={"5px 10px"}
-                rounded={"lg"}
-                cursor={"pointer"}
-                onClick={(e) => handlePlatformSelect(platform)}
+                _hover={{ textDecor: "underline", cursor: "pointer" }}
+                onClick={() => handlePlatformSelect("")}
               >
-                {platform}
-                {selectPlatformOption === platform && (
-                  <CheckIcon color={"green"} />
-                )}
+                clear
               </ListItem>
-            ))}
-          </List>
-        </Collapse>
+              {/* {platformTypes.map((platform) => ( */}
+              {platformType.map((platform) => (
+                <ListItem
+                  key={platform}
+                  _hover={{ background: "#f3f3f3" }}
+                  p={"5px 10px"}
+                  rounded={"lg"}
+                  cursor={"pointer"}
+                  onClick={(e) => handlePlatformSelect(platform)}
+                >
+                  {platform}
+                  {selectPlatformOption === platform && (
+                    <CheckIcon color={"green"} />
+                  )}
+                </ListItem>
+              ))}
+            </List>
+          </Collapse>
         </Box>
       </Box>
     </Flex>

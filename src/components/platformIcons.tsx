@@ -1,4 +1,4 @@
-import { Box, HStack } from "@chakra-ui/react";
+import { Box, HStack, Icon, Text } from "@chakra-ui/react";
 import React from "react";
 import {
   FaAndroid,
@@ -9,45 +9,50 @@ import {
   FaXbox,
 } from "react-icons/fa";
 
-import { MdOutlinePhoneIphone } from "react-icons/md";
-import { RiNetflixFill } from "react-icons/ri";
+import {
+  MdOutlinePhoneIphone,
+  MdPhoneAndroid,
+  MdPhoneIphone,
+} from "react-icons/md";
 import { Platform } from "../services/game-service";
+import { SiNintendoswitch } from "react-icons/si";
+import { IconType } from "react-icons";
 // import { Platform } from "../service/game-service";
 interface Props {
   platforms: Platform[];
 }
-export const platformTypes = [
-  "PC",
-  "PlayStation 3",
-  "Xbox 360",
-  "ios",
-  "Android",
-  "macOS",
-  "Linux",
-  "Nintendo Switch",
-];
+// export const platformTypes = [
+//   "PC",
+//   "PlayStation ",
+//   "Xbox",
+//   "ios",
+//   "Android",
+//   "macOS",
+//   "Linux",
+//   "Nintendo Switch",
+// ];
+const iconMap: { [key: string]: IconType } = {
+  pc: FaWindows,
+  playstation: FaPlaystation,
+  xbox: FaXbox,
+  ios: MdPhoneIphone,
+  android: FaAndroid,
+  mac: FaApple,
+  linux: FaLinux,
+  nintendo: SiNintendoswitch,
+};
 
 function PlatformIcons({ platforms }: Props) {
+
+  
   return (
     <HStack gap={1}>
-      {platforms.map(({ platform }) => {
-        if (platform.name === "PC")
-          return <FaWindows width={"12px"} key={platform.name} />;
-        if (platform.name === "PlayStation 3")
-          return <FaPlaystation width={"12px"} key={platform.name} />;
-        if (platform.name === "Xbox 360")
-          return <FaXbox width={"12px"} key={platform.name} />;
-        if (platform.name === "ios")
-          return <MdOutlinePhoneIphone width={"12px"} key={platform.name} />;
-        if (platform.name === "Android")
-          return <FaAndroid width={"12px"} key={platform.name} />;
-        if (platform.name === "macOS")
-          return <FaApple width={"12px"} key={platform.name} />;
-        if (platform.name === "Linux")
-          return <FaLinux width={"12px"} key={platform.name} />;
-        if (platform.name === "Nintendo Switch")
-          return <RiNetflixFill width={"12px"} key={platform.name} />;
-      })}
+      {platforms.map(({ platform }) => (
+        <>
+          <Icon key={platform.id} as={iconMap[platform.slug]} />
+          {/* <Text> {platform.slug}</Text> */}
+        </>
+      ))}
     </HStack>
   );
 }

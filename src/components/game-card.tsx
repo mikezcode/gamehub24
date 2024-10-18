@@ -15,7 +15,8 @@ interface Props {
   game: Game;
 }
 function GameCard({ game }: Props) {
- 
+ ;
+   
   return (
     <Card
       maxW={"449px"}
@@ -24,9 +25,6 @@ function GameCard({ game }: Props) {
       // m={"10px"}
       display={"flex"}
       flexDirection={"column"}
-      boxShadow={"xl"}
-      borderRadius="lg"
-      overflow={'hidden'}
       boxShadow={"xl"}
       borderRadius="lg"
       overflow={'hidden'}
@@ -40,7 +38,7 @@ function GameCard({ game }: Props) {
       />
       <CardBody flexGrow={1}>
         <HStack justify={"space-between"}>
-          <PlatformIcons platforms={game.platforms} />
+          <PlatformIcons platforms={game.parent_platforms} />
           <Badge
             py={0.5}
             px={2}
