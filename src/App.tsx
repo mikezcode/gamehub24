@@ -1,32 +1,36 @@
 import "./App.css";
 import HeaderWraper from "./components/headerWraper";
 
-import {
-  Box,
-  Heading,
-  SimpleGrid,
-  useMediaQuery,
-} from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, useMediaQuery } from "@chakra-ui/react";
 import GameListControl from "./components/game-list-control";
 import useGame from "./hook/use-Game";
 
 import GameGrid from "./components/game-grid";
 import Genres from "./components/genres";
 import { Game } from "./services/game-service";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 function App() {
-  const [data, setData] = useState<Game[]>([])
+  const [data, setData] = useState<Game[]>([]);
 
   const [genre, setGenre] = useState("");
   const [orderBy, setOrderBy] = useState("Popularity");
   const [platform, setPlatform] = useState("");
+  const [searchInput, setSearchInput] = useState("");
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
 
-  const filteredGame = genre
-    ? data.filter((game) => {
-        return game.genres.filter((g) => g.name === genre).length > 0;
-      })
-    : data;
+  let filteredGame =
+    genre || searchInput
+      ? data.filter((game) => {
+          return (
+            (game.genres.filter((g) => g.name === genre || genre === "").length !== 0) &&
+            (game.name.toLowerCase().includes(searchInput.toLowerCase().trim())) &&
+            console.log(platform)
+            
+          );
+        })
+      : data;
+
+ 
 
   filteredGame.sort((g1, g2) =>
     orderBy === "Name"
@@ -36,23 +40,23 @@ function App() {
       : g2.rating - g1.rating
   );
 
-  
   const handlGenre = (gType: string) => {
     setGenre(gType);
     setOrderBy("Popularity");
+    setSearchInput("");
   };
+
   const handleOrderBy = (orderType: string) => {
     setOrderBy(orderType);
   };
+
   const handlePlatform = (platformType: string) => {
     setPlatform(platformType);
   };
 
- 
-
   return (
     <>
-      <HeaderWraper>
+      <HeaderWraper handleSearch={(input) => setSearchInput(input)}>
         <Genres handleGenre={handlGenre} />
       </HeaderWraper>
       <SimpleGrid
@@ -72,9 +76,13 @@ function App() {
               handlePlatform={handlePlatform}
               orderBy={orderBy}
             />
-           
           </Box>
-          { <GameGrid filteredGameData={filteredGame} handleGameData={data=>setData(data)} />}
+          {
+            <GameGrid
+              filteredGameData={filteredGame}
+              handleGameData={(data) => setData(data)}
+            />
+          }
         </SimpleGrid>
       </SimpleGrid>
     </>

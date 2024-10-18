@@ -20,20 +20,17 @@ import {
   useMediaQuery,
   VStack,
 } from "@chakra-ui/react";
-import {  
-  HamburgerIcon,
-  SearchIcon,
-  CloseIcon,
-} from "@chakra-ui/icons";
+import { HamburgerIcon, SearchIcon, CloseIcon } from "@chakra-ui/icons";
 
-import  { ReactNode, useRef, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import Genres from "./genres";
 
-interface Props{
-  children:ReactNode
+interface Props {
+  children: ReactNode;
+  handleSearch: (searchText: string ) => void;
 }
 
-const HeaderWraper = ({children}:Props) => {
+const HeaderWraper = ({ children, handleSearch }: Props) => {
   const { isOpen, onToggle } = useDisclosure();
   const [searchInput, setSearchInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -41,8 +38,12 @@ const HeaderWraper = ({children}:Props) => {
   const { toggleColorMode } = useColorMode();
   const bg = useColorModeValue("#D1D2D5", "#2D3748");
 
+  // inputRef.current?.addEventListener('keydown',e=>{
+  //  if(e.key==='Enter') handleSearch(searchInput)
+  // })
+
   return (
-    <Box p={'24px 15px'}>
+    <Box p={"24px 15px"}>
       <Flex display={"flex"} align={"center"} m={2} flexWrap={"wrap"}>
         <HStack flexGrow={1} width={lgscreen ? "auto" : "100%"}>
           <Link
@@ -86,7 +87,10 @@ const HeaderWraper = ({children}:Props) => {
                 overflow: "hidden",
               }}
               value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
+              onChange={(e) => {
+                setSearchInput(e.target.value);
+                handleSearch(e.target.value);
+              }}
               ref={inputRef}
             />
             <InputRightElement>

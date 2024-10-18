@@ -13,13 +13,11 @@ function GameGrid({ handleGameData, filteredGameData }: Props) {
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
   const { isLoading, games } = useGame();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
-  // if (isLoading) return <Spinner size="xl" color="green.300" />;
  useEffect(()=>{
   handleGameData(games)  
  })
  
-
-  return (
+return (
     <Grid   
       justifyItems={"center"}
       templateColumns={
