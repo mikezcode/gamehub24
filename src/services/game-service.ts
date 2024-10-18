@@ -5,7 +5,7 @@ import createService from "./http-service";
 export interface Platform {
   platform: {
     id: number;
-    image_background: string;
+    slug: string;
     name: string;
   };
 }
@@ -16,7 +16,8 @@ export interface Game {
   background_image: string;
   genres: Genre[];
   released: string;
-  platforms: Platform[];
+  parent_platforms: Platform[];
+
   suggestions_count:number
   added:number
   rating:number

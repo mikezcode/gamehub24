@@ -39,10 +39,7 @@ const HeaderWraper = ({ children, handleSearch,sInput }: Props) => {
   const { toggleColorMode } = useColorMode();
   const bg = useColorModeValue("#D1D2D5", "#2D3748");
 
-  // inputRef.current?.addEventListener('keydown',e=>{
-  //  if(e.key==='Enter') handleSearch(searchInput)
-  // })
-  
+ 
   useEffect(() => {
     setSearchInput(sInput)
   });
