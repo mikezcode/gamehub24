@@ -1,5 +1,4 @@
 import { Box, HStack, Icon, Text } from "@chakra-ui/react";
-import { Box, HStack, Icon, Text } from "@chakra-ui/react";
 import React from "react";
 import {
   FaAndroid,
@@ -15,14 +14,7 @@ import {
   MdPhoneAndroid,
   MdPhoneIphone,
 } from "react-icons/md";
-import {
-  MdOutlinePhoneIphone,
-  MdPhoneAndroid,
-  MdPhoneIphone,
-} from "react-icons/md";
 import { Platform } from "../services/game-service";
-import { SiNintendoswitch } from "react-icons/si";
-import { IconType } from "react-icons";
 import { SiNintendoswitch } from "react-icons/si";
 import { IconType } from "react-icons";
 // import { Platform } from "../service/game-service";
@@ -49,30 +41,8 @@ const iconMap: { [key: string]: IconType } = {
   linux: FaLinux,
   nintendo: SiNintendoswitch,
 };
-// export const platformTypes = [
-//   "PC",
-//   "PlayStation ",
-//   "Xbox",
-//   "ios",
-//   "Android",
-//   "macOS",
-//   "Linux",
-//   "Nintendo Switch",
-// ];
-const iconMap: { [key: string]: IconType } = {
-  pc: FaWindows,
-  playstation: FaPlaystation,
-  xbox: FaXbox,
-  ios: MdPhoneIphone,
-  android: FaAndroid,
-  mac: FaApple,
-  linux: FaLinux,
-  nintendo: SiNintendoswitch,
-};
 
 function PlatformIcons({ platforms }: Props) {
-
-  
 
   
   return (
