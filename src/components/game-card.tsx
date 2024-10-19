@@ -10,6 +10,7 @@ import {
 import { Game } from "../services/game-service";
 import PlatformIcons from "./platformIcons";
 import { AddIcon } from "@chakra-ui/icons";
+import cropImage from "../services/image-url";
 
 interface Props {
   game: Game;
@@ -26,14 +27,15 @@ function GameCard({ game }: Props) {
       display={"flex"}
       flexDirection={"column"}
       boxShadow={"xl"}
-      borderRadius="lg"
-      overflow={'hidden'}
+      rounded="lg"
+      overflow={"hidden"}
+      _hover={{ cursor: "pointer" }}
     >
       <Image
         h={"15rem"}
         objectFit={"cover"}
         objectPosition={"top"}
-        src={game.background_image}
+        src={cropImage(game.background_image)}
         alt=""
       />
       <CardBody flexGrow={1}>
@@ -43,8 +45,8 @@ function GameCard({ game }: Props) {
             py={0.5}
             px={2}
             rounded={"md"}
-            color={"#6DC849"}
-            border={"0.75px solid #6DC849"}
+            color={"green.300"}
+            // border={"0.75px solid #6DC849"}
             fontSize={"14px"}
             fontWeight={"700"}
           >
@@ -52,7 +54,7 @@ function GameCard({ game }: Props) {
           </Badge>
         </HStack>
         <Heading fontSize={"30px"} lineHeight={"35px"} fontWeight={700} mt={3}>
-          {game.name} 👍
+          {game.name} {game.suggestions_count > 300 ? "🎯" : "👍"}
         </Heading>
         <Badge
           py={1}

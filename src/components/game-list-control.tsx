@@ -57,14 +57,14 @@ function GameListControl({
     onPlatformToggle();
     if (isOrderOpen) onOrderToggle();
   };
-  
   useEffect(() => {    
     setSelectOrderOption(orderBy);
     setSelectPlatformOption(platform);
   });
 
 
-   
+  
+
 
   const handleOrderSelect = (option: string) => {
     setSelectOrderOption(option);
