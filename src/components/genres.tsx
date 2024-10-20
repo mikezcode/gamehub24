@@ -12,7 +12,8 @@ const Genres = ({ handleGenre }: Props) => {
   const filterByGenre = (gType: string) => {
     handleGenre(gType);
   };
-//  if (isLoading)  return <Spinner size="xl" color="green.300" />;
+ if (isLoading)  return <Spinner size="xl" color="green.300" />;
+ else
   return (
     <Box>
       <Link _hover={{ textDecor: "none" }} onClick={() => handleGenre("")}>

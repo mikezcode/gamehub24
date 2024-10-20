@@ -1,15 +1,17 @@
 import "./App.css";
-import HeaderWraper from "./components/headerWraper";
+import HeaderWraper, { InputHandle } from "./components/headerWraper";
 
 import { Box, Heading, SimpleGrid, useMediaQuery } from "@chakra-ui/react";
-import GameListControl from "./components/game-list-control";
+import GameListControl, {
+  GameListControlHandle,
+} from "./components/game-list-control";
 import useGame from "./hook/use-Game";
 
 import GameGrid from "./components/game-grid";
 import Genres from "./components/genres";
 import { Game } from "./services/game-service";
-import { RefObject, useEffect, useState } from "react";
-import { input } from "framer-motion/client";
+import { RefObject, useEffect, useRef, useState } from "react";
+import { header, input } from "framer-motion/client";
 function App() {
   const [data, setData] = useState<Game[]>([]);
 
@@ -18,20 +20,21 @@ function App() {
   const [platform, setPlatform] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
-  
-  
+  const gameListRef = useRef<GameListControlHandle>(null);
+  const headerWraperRef = useRef<InputHandle>(null)
+
   let filteredGame = (
     genre || searchInput || platform
       ? data.filter((game) => {
-       
           return (
             (genre === "" ||
               game.genres.filter((g) => g.name === genre).length !== 0) &&
             (searchInput === "" ||
               game.name.toLowerCase().includes(searchInput)) &&
             (platform === "" ||
-              game.parent_platforms.filter((_platform) => platform.toLowerCase().includes( _platform.platform.slug))
-                .length !== 0)
+              game.parent_platforms.filter((_platform) =>
+                platform.toLowerCase().includes(_platform.platform.slug)
+              ).length !== 0)
           );
         })
       : data
@@ -46,15 +49,19 @@ function App() {
   const handlGenre = (gType: string) => {
     setGenre(gType);
     setOrderBy("Popularity");
-    setPlatform("");
+    setPlatform("");    
+    headerWraperRef.current?.resetInput()
     setSearchInput("");
+    gameListRef.current?.resetOrder();
+    gameListRef.current?.resetPlatform();
   };
 
   return (
     <>
       <HeaderWraper
         handleSearch={(input) => setSearchInput(input.toLowerCase().trim())}
-        sInput={searchInput}
+        // sInput={searchInput}
+        ref={headerWraperRef}
       >
         <Genres handleGenre={handlGenre} />
       </HeaderWraper>
@@ -75,8 +82,9 @@ function App() {
               handlePlatform={(platformType: string) =>
                 setPlatform(platformType)
               }
-              orderBy={orderBy}
-              platform={platform}
+              // orderBy={orderBy}
+              // platform={platform}
+              ref={gameListRef}
             />
           </Box>
           {
