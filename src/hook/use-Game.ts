@@ -1,4 +1,4 @@
-
+import { AxiosRequestConfig } from "axios";
 import useData from "./use-Data";
 import { Genre } from "./use-genre";
 
@@ -23,5 +23,9 @@ export interface Game {
   rating: number;
 }
 
-const useGame = () => useData<Game>("/games");
+const useGame = (selectedGenre: Genre |null) => {
+
+  
+ return useData<Game>("/games", { params: { genres: selectedGenre?.id } },[selectedGenre?.id]);
+};
 export default useGame;

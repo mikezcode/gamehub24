@@ -5,17 +5,16 @@ import { Box, Heading, SimpleGrid, useMediaQuery } from "@chakra-ui/react";
 import GameListControl, {
   GameListControlHandle,
 } from "./components/game-list-control";
-import useGame from "./hook/use-Game";
+import useGame, { Game } from "./hook/use-Game";
 
 import GameGrid from "./components/game-grid";
 import Genres from "./components/genres";
-import { Game } from "./services/game-service";
+
 import { RefObject, useEffect, useRef, useState } from "react";
 import { header, input } from "framer-motion/client";
+import { Genre } from "./hook/use-genre";
 function App() {
-  const [data, setData] = useState<Game[]>([]);
-
-  const [genre, setGenre] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
   const [orderBy, setOrderBy] = useState("Popularity");
   const [platform, setPlatform] = useState("");
   const [searchInput, setSearchInput] = useState("");
@@ -23,31 +22,31 @@ function App() {
   const gameListRef = useRef<GameListControlHandle>(null);
   const headerWraperRef = useRef<InputHandle>(null)
 
-  let filteredGame = (
-    genre || searchInput || platform
-      ? data.filter((game) => {
-          return (
-            (genre === "" ||
-              game.genres.filter((g) => g.name === genre).length !== 0) &&
-            (searchInput === "" ||
-              game.name.toLowerCase().includes(searchInput)) &&
-            (platform === "" ||
-              game.parent_platforms.filter((_platform) =>
-                platform.toLowerCase().includes(_platform.platform.slug)
-              ).length !== 0)
-          );
-        })
-      : data
-  ).sort((g1, g2) =>
-    orderBy === "Name"
-      ? g1.name.localeCompare(g2.name)
-      : orderBy === "Popularity"
-      ? g2.added - g1.added
-      : g2.rating - g1.rating
-  );
+  // let filteredGame = (
+  //   genre || searchInput || platform
+  //     ? data.filter((game) => {
+  //         return (
+  //           (genre === "" ||
+  //             game.genres.filter((g) => g.name === genre).length !== 0) &&
+  //           (searchInput === "" ||
+  //             game.name.toLowerCase().includes(searchInput)) &&
+  //           (platform === "" ||
+  //             game.parent_platforms.filter((_platform) =>
+  //               platform.toLowerCase().includes(_platform.platform.slug)
+  //             ).length !== 0)
+  //         );
+  //       })
+  //     : data
+  // ).sort((g1, g2) =>
+  //   orderBy === "Name"
+  //     ? g1.name.localeCompare(g2.name)
+  //     : orderBy === "Popularity"
+  //     ? g2.added - g1.added
+  //     : g2.rating - g1.rating
+  // );
 
-  const handlGenre = (gType: string) => {
-    setGenre(gType);
+  const handlGenre = (gType: Genre ) => {
+    setSelectedGenre(gType);
     setOrderBy("Popularity");
     setPlatform("");    
     headerWraperRef.current?.resetInput()
@@ -63,18 +62,18 @@ function App() {
         // sInput={searchInput}
         ref={headerWraperRef}
       >
-        <Genres handleGenre={handlGenre} />
+        <Genres handleSelectedGenre={handlGenre} />
       </HeaderWraper>
       <SimpleGrid
         columns={lgscreen ? 2 : 1}
         templateColumns={lgscreen ? "220px 1fr" : "1fr"}
         px={"15px"}
       >
-        {lgscreen ? <Genres handleGenre={handlGenre} /> : <></>}
+        {lgscreen ? <Genres handleSelectedGenre={setSelectedGenre} /> : <></>}
         <SimpleGrid templateRows={"auto auto"} ml={0} alignContent={"start"}>
           <Box>
             <Heading fontSize={"5xl"} textAlign={lgscreen ? "left" : "center"}>
-              {genre || "All"} Games
+              {selectedGenre?.name || "All"} Games
             </Heading>
 
             <GameListControl
@@ -89,8 +88,11 @@ function App() {
           </Box>
           {
             <GameGrid
-              filteredGameData={filteredGame}
-              handleGameData={(data) => setData(data)}
+              // filteredGameData={filteredGame}
+              // handleGameData={(data) => setData(data)}
+              // selectedGenre={genre}
+              selectedGenre={selectedGenre}
+              
             />
           }
         </SimpleGrid>

@@ -1,36 +1,33 @@
 import { Box, Heading, Link, Spinner } from "@chakra-ui/react";
-import Genre from "./genre";
-import useGenre from "../hook/use-genre";
+
+import useGenre, { Genre } from "../hook/use-genre";
+import GenreComp from "./genre";
 
 interface Props {
-  handleGenre: (gType: string) => void;
+  handleSelectedGenre: (genre: Genre ) => void;
 }
 
-const Genres = ({ handleGenre }: Props) => {
-  const { data:genres,isLoading } = useGenre();
+const Genres = ({ handleSelectedGenre }:Props) => {
+  const { data: genres, isLoading } = useGenre();
 
-  const filterByGenre = (gType: string) => {
-    handleGenre(gType);
-  };
- if (isLoading)  return <Spinner size="xl" color="green.300" />;
- else
-  return (
-    <Box>
-      <Link _hover={{ textDecor: "none" }} onClick={() => handleGenre("")}>
-        <Heading fontSize={"24px"} fontWeight={700} color={"white"} mb={4}>
-          Genres
-        </Heading>
-      </Link>
-      {genres.map((genre) => (
-        <Genre
-          key={genre.id}
-          url={genre.image_background}
-          title={genre.name}
-          handleGenre={(gType) => filterByGenre(gType)}
-        />
-      ))}
-    </Box>
-  );
+  if (isLoading) return <Spinner size="xl" color="green.300" />;
+  else
+    return (
+      <Box>
+        <Link _hover={{ textDecor: "none" }} onClick={()=>handleSelectedGenre(null)}>
+          <Heading fontSize={"24px"} fontWeight={700} color={"white"} mb={4}>
+            Genres
+          </Heading>
+        </Link>
+        {genres.map((genre) => (
+          <GenreComp
+            key={genre.id}
+            genre={genre}
+            handleClick={(genre) =>handleSelectedGenre(genre)}
+          />
+        ))}
+      </Box>
+    );
 };
 
 export default Genres;

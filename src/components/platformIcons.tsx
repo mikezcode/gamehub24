@@ -9,28 +9,16 @@ import {
   FaXbox,
 } from "react-icons/fa";
 
-import {
-  MdOutlinePhoneIphone,
-  MdPhoneAndroid,
-  MdPhoneIphone,
-} from "react-icons/md";
-import { Platform } from "../services/game-service";
+import { MdPhoneIphone } from "react-icons/md";
+
 import { SiNintendoswitch } from "react-icons/si";
 import { IconType } from "react-icons";
+import { Platform } from "../hook/use-Game";
 // import { Platform } from "../service/game-service";
 interface Props {
   platforms: Platform[];
 }
-// export const platformTypes = [
-//   "PC",
-//   "PlayStation ",
-//   "Xbox",
-//   "ios",
-//   "Android",
-//   "macOS",
-//   "Linux",
-//   "Nintendo Switch",
-// ];
+
 const iconMap: { [key: string]: IconType } = {
   pc: FaWindows,
   playstation: FaPlaystation,
@@ -43,15 +31,14 @@ const iconMap: { [key: string]: IconType } = {
 };
 
 function PlatformIcons({ platforms }: Props) {
-
-  
   return (
     <HStack gap={1}>
       {platforms.map(({ platform }) => (
-        <>
-          <Icon key={platform.id} as={iconMap[platform.slug]} color={'gray.400'} />
-          {/* <Text> {platform.slug}</Text> */}
-        </>
+        <Icon
+          key={platform.id}
+          as={iconMap[platform.slug]}
+          color={"gray.400"}
+        />
       ))}
     </HStack>
   );
