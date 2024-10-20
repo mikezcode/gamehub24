@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Genres = ({ handleGenre }: Props) => {
-  const { genres, err,isLoading } = useGenre();
+  const { data:genres,isLoading } = useGenre();
 
   const filterByGenre = (gType: string) => {
     handleGenre(gType);

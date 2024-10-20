@@ -5,12 +5,12 @@ import {
   CardBody,
   HStack,
   Badge,
-  useColorModeValue,
 } from "@chakra-ui/react";
-import { Game } from "../services/game-service";
+
 import PlatformIcons from "./platformIcons";
 import { AddIcon } from "@chakra-ui/icons";
 import cropImage from "../services/image-url";
+import { Game } from "../hook/use-Game";
 
 interface Props {
   game: Game;

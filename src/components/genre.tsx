@@ -1,14 +1,9 @@
-import {
-  Flex,
-  Avatar,
-  Box,
-  Badge,
+import { 
   Text,
   HStack,
   Image,
   Link,
 } from "@chakra-ui/react";
-import React from "react";
 
 interface Props {
   url: string;
@@ -18,7 +13,7 @@ interface Props {
 
 function Genre({ url, title,handleGenre }: Props) {
   return (
-    <Link _hover={{ textDecoration: "none" }} onClick={()=>handleGenre(title)}>
+    <Link  onClick={()=>handleGenre(title)}>
       <HStack align={"center"} mb={3}>
         <Image
           borderColor={"none"}

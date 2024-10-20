@@ -1,11 +1,7 @@
 import {
   Box,
-  Button,
-  calc,
   Collapse,
-  Container,
   Flex,
-  Heading,
   HStack,
   Input,
   InputGroup,
@@ -13,7 +9,6 @@ import {
   InputRightElement,
   Link,
   Switch,
-  Text,
   useColorMode,
   useColorModeValue,
   useDisclosure,
@@ -25,7 +20,6 @@ import { HamburgerIcon, SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import {
   forwardRef,
   ReactNode,
-  RefObject,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -50,12 +44,7 @@ const HeaderWraper = forwardRef<InputHandle, Props>(
     const { toggleColorMode } = useColorMode();
     const bg = useColorModeValue("#D1D2D5", "#2D3748");
 
-    useEffect(() => {
-      // setSearchInput(sInput);
-    });
-
-    useImperativeHandle(ref, () => {
-      console.log("called in imperative");
+    useImperativeHandle(ref, () => {     
       return {
         resetInput: () => setSearchInput(""),
       };
