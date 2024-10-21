@@ -10,8 +10,8 @@ import useGame, { Game } from "./hook/use-Game";
 import GameGrid from "./components/game-grid";
 import Genres from "./components/genres";
 
-import { RefObject, useEffect, useRef, useState } from "react";
-import { header, input } from "framer-motion/client";
+import { useRef, useState } from "react";
+
 import { Genre } from "./hook/use-genre";
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
@@ -21,7 +21,8 @@ function App() {
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
   const gameListRef = useRef<GameListControlHandle>(null);
   const headerWraperRef = useRef<InputHandle>(null)
-
+ 
+  
   // let filteredGame = (
   //   genre || searchInput || platform
   //     ? data.filter((game) => {
@@ -45,7 +46,7 @@ function App() {
   //     : g2.rating - g1.rating
   // );
 
-  const handlGenre = (gType: Genre ) => {
+  const handlGenre = (gType: Genre | null ) => {  
     setSelectedGenre(gType);
     setOrderBy("Popularity");
     setPlatform("");    
@@ -53,6 +54,7 @@ function App() {
     setSearchInput("");
     gameListRef.current?.resetOrder();
     gameListRef.current?.resetPlatform();
+    
   };
 
   return (
@@ -69,7 +71,7 @@ function App() {
         templateColumns={lgscreen ? "220px 1fr" : "1fr"}
         px={"15px"}
       >
-        {lgscreen ? <Genres handleSelectedGenre={setSelectedGenre} /> : <></>}
+        {lgscreen ? <Genres handleSelectedGenre={handlGenre} /> : <></>}
         <SimpleGrid templateRows={"auto auto"} ml={0} alignContent={"start"}>
           <Box>
             <Heading fontSize={"5xl"} textAlign={lgscreen ? "left" : "center"}>

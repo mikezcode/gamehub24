@@ -4,11 +4,11 @@ import useGenre, { Genre } from "../hook/use-genre";
 import GenreComp from "./genre";
 
 interface Props {
-  handleSelectedGenre: (genre: Genre ) => void;
+  handleSelectedGenre: (genre: Genre | null ) => void;
 }
 
 const Genres = ({ handleSelectedGenre }:Props) => {
-  const { data: genres, isLoading } = useGenre();
+  const { data, isLoading } = useGenre();
 
   if (isLoading) return <Spinner size="xl" color="green.300" />;
   else
@@ -19,7 +19,7 @@ const Genres = ({ handleSelectedGenre }:Props) => {
             Genres
           </Heading>
         </Link>
-        {genres.map((genre) => (
+        {data.map((genre) => (
           <GenreComp
             key={genre.id}
             genre={genre}

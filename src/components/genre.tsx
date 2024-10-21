@@ -1,6 +1,6 @@
 import { Text, HStack, Image, Link } from "@chakra-ui/react";
 import { Genre } from "../hook/use-genre";
-import { useState } from "react";
+
 
 
 interface Props { 

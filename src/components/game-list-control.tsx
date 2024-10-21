@@ -11,7 +11,7 @@ import {
   useDisclosure,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 
 interface Props {
   handleOrderBy: (option: string) => void;
@@ -20,7 +20,7 @@ interface Props {
   // platform: string;
 }
 
-const platformType = [
+const platformTypes = [
   "PC",
   "PlayStation",
   "Xbox",
@@ -31,6 +31,7 @@ const platformType = [
   "Nintendo Switch",
 ];
 
+const orderTypes =["Popularity","Name","Average rating"];
 //
 
 export interface GameListControlHandle {
@@ -109,12 +110,27 @@ const GameListControl = forwardRef<GameListControlHandle, Readonly<Props>>(
                 p={"15px"}
                 rounded={"sm"}
               >
-                <ListItem
+                {orderTypes.map((orderType) => (
+                  <ListItem
+                    _hover={{ background: "#f3f3f3" }}
+                    p={"5px 10px"}
+                    rounded={"lg"}
+                    cursor={"pointer"}
+                    onClick={() => handleOrderSelect(orderType)}
+                  >
+                    {orderType}
+                    {selectOrderOption === orderType && (
+                      <CheckIcon color={"green"} />
+                    )}
+                  </ListItem>
+                ))}
+
+                {/* <ListItem
                   _hover={{ background: "#f3f3f3" }}
                   p={"5px 10px"}
                   rounded={"lg"}
                   cursor={"pointer"}
-                  onClick={(e) => handleOrderSelect("Popularity")}
+                  onClick={() => handleOrderSelect("Popularity")}
                 >
                   Populatrity{" "}
                   {selectOrderOption === "Popularity" && (
@@ -126,7 +142,7 @@ const GameListControl = forwardRef<GameListControlHandle, Readonly<Props>>(
                   p={"5px 10px"}
                   rounded={"lg"}
                   cursor={"pointer"}
-                  onClick={(e) => handleOrderSelect("Name")}
+                  onClick={() => handleOrderSelect("Name")}
                 >
                   Name{" "}
                   {selectOrderOption === "Name" && (
@@ -138,13 +154,13 @@ const GameListControl = forwardRef<GameListControlHandle, Readonly<Props>>(
                   p={"5px 10px"}
                   rounded={"lg"}
                   cursor={"pointer"}
-                  onClick={(e) => handleOrderSelect("Average rating")}
+                  onClick={() => handleOrderSelect("Average rating")}
                 >
-                  Average rating{" "}
+                  Average rating
                   {selectOrderOption === "Average rating" && (
                     <CheckIcon color={"green"} />
                   )}
-                </ListItem>
+                </ListItem> */}
               </List>
             </Collapse>
           </Box>
@@ -182,15 +198,15 @@ const GameListControl = forwardRef<GameListControlHandle, Readonly<Props>>(
                 >
                   clear
                 </ListItem>
-                {/* {platformTypes.map((platform) => ( */}
-                {platformType.map((platform) => (
+
+                {platformTypes.map((platform) => (
                   <ListItem
                     key={platform}
                     _hover={{ background: "#f3f3f3" }}
                     p={"5px 10px"}
                     rounded={"lg"}
                     cursor={"pointer"}
-                    onClick={(e) => handlePlatformSelect(platform)}
+                    onClick={() => handlePlatformSelect(platform)}
                   >
                     {platform}
                     {selectPlatformOption === platform && (
