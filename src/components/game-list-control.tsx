@@ -112,6 +112,7 @@ const GameListControl = forwardRef<GameListControlHandle, Readonly<Props>>(
               >
                 {orderTypes.map((orderType) => (
                   <ListItem
+                  key={orderType}
                     _hover={{ background: "#f3f3f3" }}
                     p={"5px 10px"}
                     rounded={"lg"}
@@ -123,47 +124,11 @@ const GameListControl = forwardRef<GameListControlHandle, Readonly<Props>>(
                       <CheckIcon color={"green"} />
                     )}
                   </ListItem>
-                ))}
-
-                {/* <ListItem
-                  _hover={{ background: "#f3f3f3" }}
-                  p={"5px 10px"}
-                  rounded={"lg"}
-                  cursor={"pointer"}
-                  onClick={() => handleOrderSelect("Popularity")}
-                >
-                  Populatrity{" "}
-                  {selectOrderOption === "Popularity" && (
-                    <CheckIcon color={"green"} />
-                  )}
-                </ListItem>
-                <ListItem
-                  _hover={{ background: "#f3f3f3" }}
-                  p={"5px 10px"}
-                  rounded={"lg"}
-                  cursor={"pointer"}
-                  onClick={() => handleOrderSelect("Name")}
-                >
-                  Name{" "}
-                  {selectOrderOption === "Name" && (
-                    <CheckIcon color={"green"} />
-                  )}
-                </ListItem>
-                <ListItem
-                  _hover={{ background: "#f3f3f3" }}
-                  p={"5px 10px"}
-                  rounded={"lg"}
-                  cursor={"pointer"}
-                  onClick={() => handleOrderSelect("Average rating")}
-                >
-                  Average rating
-                  {selectOrderOption === "Average rating" && (
-                    <CheckIcon color={"green"} />
-                  )}
-                </ListItem> */}
+                ))}             
               </List>
             </Collapse>
           </Box>
+          
         </Box>
         <Box width={"max-content"} alignSelf={"start"}>
           <Button

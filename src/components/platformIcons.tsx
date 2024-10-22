@@ -16,7 +16,7 @@ import { IconType } from "react-icons";
 import { Platform } from "../hook/use-Game";
 // import { Platform } from "../service/game-service";
 interface Props {
-  platforms: Platform[];
+  platforms: { platform: Platform }[];
 }
 
 const iconMap: { [key: string]: IconType } = {
@@ -33,13 +33,16 @@ const iconMap: { [key: string]: IconType } = {
 function PlatformIcons({ platforms }: Props) {
   return (
     <HStack gap={1}>
-      {platforms.map(({ platform }) => (
-        <Icon
-          key={platform.id}
-          as={iconMap[platform.slug]}
-          color={"gray.400"}
-        />
-      ))}
+      {platforms.map(
+        ({ platform }) =>
+          iconMap[platform.slug] && (
+            <Icon
+              key={platform.id}
+              as={iconMap[platform.slug]}
+              color={"gray.400"}
+            />
+          )
+      )}
     </HStack>
   );
 }

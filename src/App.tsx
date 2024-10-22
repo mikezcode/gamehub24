@@ -5,7 +5,7 @@ import { Box, Heading, SimpleGrid, useMediaQuery } from "@chakra-ui/react";
 import GameListControl, {
   GameListControlHandle,
 } from "./components/game-list-control";
-import useGame, { Game } from "./hook/use-Game";
+import useGame, { Game, Platform } from "./hook/use-Game";
 
 import GameGrid from "./components/game-grid";
 import Genres from "./components/genres";
@@ -13,16 +13,16 @@ import Genres from "./components/genres";
 import { useRef, useState } from "react";
 
 import { Genre } from "./hook/use-genre";
+import { PlatformSelector } from "./components/platform-selector";
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
   const [orderBy, setOrderBy] = useState("Popularity");
-  const [platform, setPlatform] = useState("");
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
   const [searchInput, setSearchInput] = useState("");
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
   const gameListRef = useRef<GameListControlHandle>(null);
-  const headerWraperRef = useRef<InputHandle>(null)
- 
-  
+  const headerWraperRef = useRef<InputHandle>(null);
+
   // let filteredGame = (
   //   genre || searchInput || platform
   //     ? data.filter((game) => {
@@ -46,15 +46,13 @@ function App() {
   //     : g2.rating - g1.rating
   // );
 
-  const handlGenre = (gType: Genre | null ) => {  
+  const handlGenre = (gType: Genre | null) => {
     setSelectedGenre(gType);
     setOrderBy("Popularity");
-    setPlatform("");    
-    headerWraperRef.current?.resetInput()
+    headerWraperRef.current?.resetInput();
     setSearchInput("");
     gameListRef.current?.resetOrder();
     gameListRef.current?.resetPlatform();
-    
   };
 
   return (
@@ -75,18 +73,19 @@ function App() {
         <SimpleGrid templateRows={"auto auto"} ml={0} alignContent={"start"}>
           <Box>
             <Heading fontSize={"5xl"} textAlign={lgscreen ? "left" : "center"}>
-              {selectedGenre?.name || "All"} Games
+              {selectedGenre?.name ?? "All"} Games
             </Heading>
 
             <GameListControl
               handleOrderBy={(orderType: string) => setOrderBy(orderType)}
               handlePlatform={(platformType: string) =>
-                setPlatform(platformType)
+                setSelectedPlatform(null)
               }
               // orderBy={orderBy}
               // platform={platform}
               ref={gameListRef}
             />
+            <PlatformSelector selectedPlatform ={selectedPlatform} onSelectPlatform={setSelectedPlatform} />
           </Box>
           {
             <GameGrid
@@ -94,7 +93,7 @@ function App() {
               // handleGameData={(data) => setData(data)}
               // selectedGenre={genre}
               selectedGenre={selectedGenre}
-              
+              selectedPlatform = {selectedPlatform}
             />
           }
         </SimpleGrid>
