@@ -3,14 +3,17 @@ import GameCard from "./game-card";
 import useGame, { Platform } from "../hook/use-Game";
 import GameCardSkeleton from "./game-card-skeleton";
 import { Genre } from "../hook/use-genre";
+import { GameQuery } from "../App";
 interface Props {
-  selectedGenre: Genre | null;
-  selectedPlatform:Platform | null ;
+  // selectedGenre: Genre | null;
+  // selectedPlatform:Platform | null 
+  gameQuery: GameQuery
 }
 
-const GameGrid = ({ selectedGenre,selectedPlatform }: Props) => {
+
+const GameGrid = ({ gameQuery }: Props) => {
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
-  const { data, isLoading } = useGame(selectedGenre,selectedPlatform);
+  const { data, isLoading } = useGame(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
  
   return (
