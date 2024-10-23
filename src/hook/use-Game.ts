@@ -22,15 +22,16 @@ export interface Game {
   rating: number;
 }
 
-const useGame = (
-  gameQuery:GameQuery
-) => {
+const useGame = (gameQuery: GameQuery) => {
+
+  
   return useData<Game>(
     "/games",
     {
       params: {
         genres: gameQuery.genre?.id,
         parent_platforms: gameQuery.platform?.id,
+        ordering: gameQuery.sortOrder,
       },
     },
     [gameQuery]
