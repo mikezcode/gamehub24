@@ -1,5 +1,5 @@
 import "./App.css";
-import HeaderWraper, { InputHandle } from "./components/headerWraper";
+import SearchBar, { InputHandle } from "./components/search-bar";
 
 import {
   Box,
@@ -23,7 +23,8 @@ import { SortSelector } from "./components/sort-selector";
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
-  sortOrder:string
+  sortOrder: string;
+  searchText:string;
 }
 
 function App() {
@@ -36,15 +37,15 @@ function App() {
 
   return (
     <>
-      <HeaderWraper
-        handleSearch={(input) => setSearchInput(input.toLowerCase().trim())}
+      <SearchBar
+        onGameSearch={(searchText) => setGameQuery({...gameQuery,searchText})}
         // sInput={searchInput}
-        ref={headerWraperRef}
+        searchText={gameQuery.searchText}
       >
         <Genres
           handleSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
         />
-      </HeaderWraper>
+      </SearchBar>
       <SimpleGrid
         columns={lgscreen ? 2 : 1}
         templateColumns={lgscreen ? "220px 1fr" : "1fr"}
@@ -75,7 +76,9 @@ function App() {
               justify={lgscreen ? "start" : "center"}
             >
               <SortSelector
-                onSelectedSort={sortOrder=> setGameQuery({...gameQuery,sortOrder})}
+                onSelectedSort={(sortOrder) =>
+                  setGameQuery({ ...gameQuery, sortOrder })
+                }
                 selectedSort={gameQuery.sortOrder}
               />
               <PlatformSelector

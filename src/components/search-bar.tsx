@@ -18,37 +18,28 @@ import {
 import { HamburgerIcon, SearchIcon, CloseIcon } from "@chakra-ui/icons";
 
 import {
-  forwardRef,
   ReactNode,
-  useEffect,
-  useImperativeHandle,
   useRef,
   useState,
 } from "react";
 
 interface Props {
   children: ReactNode;
-  handleSearch: (searchText: string) => void;
-  // sInput: string;
+  onGameSearch: (searchText: string) => void;
+  searchText: string;
 }
 export interface InputHandle {
   resetInput: () => void;
 }
 
-const HeaderWraper = forwardRef<InputHandle, Props>(
-  ({ children, handleSearch }, ref) => {
+const SearchBar = 
+  ({ children, onGameSearch,searchText }:Props) => {
     const { isOpen, onToggle } = useDisclosure();
-    const [searchInput, setSearchInput] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
     const [lgscreen] = useMediaQuery("(min-width: 978px)");
     const { toggleColorMode } = useColorMode();
     const bg = useColorModeValue("#D1D2D5", "#2D3748");
-
-    useImperativeHandle(ref, () => {     
-      return {
-        resetInput: () => setSearchInput(""),
-      };
-    });
+   const [searchInput, setSearchInput] = useState("")
 
     return (
       <Box p={"24px 15px"}>
@@ -96,8 +87,9 @@ const HeaderWraper = forwardRef<InputHandle, Props>(
                 }}
                 value={searchInput}
                 onChange={(e) => {
-                  setSearchInput(e.target.value);
-                  handleSearch(e.target.value);
+                  onGameSearch(e.target.value);
+                  setSearchInput(e.target.value)
+                  
                 }}
                 ref={inputRef}
               />
@@ -107,8 +99,9 @@ const HeaderWraper = forwardRef<InputHandle, Props>(
                   color={"#181818"}
                   cursor={"pointer"}
                   onClick={() => {
-                    setSearchInput("");
                     inputRef.current?.focus();
+                    setSearchInput('')
+                    onGameSearch("");
                   }}
                 />
               </InputRightElement>
@@ -137,6 +130,6 @@ const HeaderWraper = forwardRef<InputHandle, Props>(
       </Box>
     );
   }
-);
 
-export default HeaderWraper;
+
+export default SearchBar;

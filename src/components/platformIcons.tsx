@@ -31,7 +31,7 @@ const iconMap: { [key: string]: IconType } = {
 };
 
 function PlatformIcons({ platforms }: Props) {
-  // if(!platforms) return;
+  if(!platforms) return;
   return (
     <HStack gap={1}>
       {platforms.map(
