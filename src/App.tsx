@@ -5,6 +5,7 @@ import {
   Box,
   Flex,
   Heading,
+  Show,
   SimpleGrid,
   useMediaQuery,
 } from "@chakra-ui/react";
@@ -24,26 +25,25 @@ export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
   sortOrder: string;
-  searchText:string;
+  searchText: string;
 }
 
 function App() {
-  // const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-  // const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
-  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-  const [searchInput, setSearchInput] = useState("");
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery); 
   const [lgscreen] = useMediaQuery("(min-width: 978px)");
-  const headerWraperRef = useRef<InputHandle>(null);
 
   return (
     <>
       <SearchBar
-        onGameSearch={(searchText) => setGameQuery({...gameQuery,searchText})}
+        onGameSearch={(searchText) =>
+          setGameQuery({ ...gameQuery, searchText })
+        }
         // sInput={searchInput}
         searchText={gameQuery.searchText}
       >
         <Genres
           handleSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+          selectedGenre={gameQuery.genre}
         />
       </SearchBar>
       <SimpleGrid
@@ -56,10 +56,13 @@ function App() {
             handleSelectedGenre={(genre) =>
               setGameQuery({ ...gameQuery, genre })
             }
+            selectedGenre={gameQuery.genre}
           />
         ) : (
           <></>
         )}
+       
+
         <SimpleGrid templateRows={"auto auto"} ml={0} alignContent={"start"}>
           <Box>
             <Heading fontSize={"5xl"} textAlign={lgscreen ? "left" : "center"}>
@@ -89,7 +92,7 @@ function App() {
               />
             </Flex>
           </Box>
-          {<GameGrid gameQuery={gameQuery} />}
+          <GameGrid gameQuery={gameQuery} />
         </SimpleGrid>
       </SimpleGrid>
     </>
