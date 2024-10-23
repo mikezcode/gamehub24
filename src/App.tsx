@@ -1,22 +1,10 @@
 import "./App.css";
-import SearchBar, { InputHandle } from "./components/search-bar";
-
-import {
-  Box,
-  Flex,
-  Heading,
-  Show,
-  SimpleGrid,
-  useMediaQuery,
-} from "@chakra-ui/react";
-
-import useGame, { Game, Platform } from "./hook/use-Game";
-
+import SearchBar from "./components/search-bar";
+import { Box, Flex, Heading, Show, SimpleGrid } from "@chakra-ui/react";
+import { Platform } from "./hook/use-Game";
 import GameGrid from "./components/game-grid";
 import Genres from "./components/genres";
-
-import { useRef, useState } from "react";
-
+import { useState } from "react";
 import { Genre } from "./hook/use-genre";
 import { PlatformSelector } from "./components/platform-selector";
 import { SortSelector } from "./components/sort-selector";
@@ -29,8 +17,7 @@ export interface GameQuery {
 }
 
 function App() {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery); 
-  const [lgscreen] = useMediaQuery("(min-width: 978px)");
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
   return (
     <>
@@ -38,8 +25,6 @@ function App() {
         onGameSearch={(searchText) =>
           setGameQuery({ ...gameQuery, searchText })
         }
-        // sInput={searchInput}
-        searchText={gameQuery.searchText}
       >
         <Genres
           handleSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
@@ -47,27 +32,27 @@ function App() {
         />
       </SearchBar>
       <SimpleGrid
-        columns={lgscreen ? 2 : 1}
-        templateColumns={lgscreen ? "220px 1fr" : "1fr"}
+        columns={{ lg: 2, base: 1 }}
+        templateColumns={{ base: "1fr", lg: "220px 1fr" }}
         px={"15px"}
       >
-        {lgscreen ? (
+        <Show above="lg">
           <Genres
             handleSelectedGenre={(genre) =>
               setGameQuery({ ...gameQuery, genre })
             }
             selectedGenre={gameQuery.genre}
           />
-        ) : (
-          <></>
-        )}
-       
+        </Show>
 
         <SimpleGrid templateRows={"auto auto"} ml={0} alignContent={"start"}>
           <Box>
-            <Heading fontSize={"5xl"} textAlign={lgscreen ? "left" : "center"}>
-              {`${gameQuery.genre?.name || ""}  ${
-                gameQuery.platform?.name || ""
+            <Heading
+              fontSize={"5xl"}
+              textAlign={{ base: "center", lg: "left" }}
+            >
+              {`${gameQuery.genre?.name ?? ""}  ${
+                gameQuery.platform?.name ?? ""
               } `}
               Games
             </Heading>
@@ -76,7 +61,7 @@ function App() {
               my={5}
               flexWrap={"wrap"}
               gap={2}
-              justify={lgscreen ? "start" : "center"}
+              justify={{ base: "center", lg: "start" }}
             >
               <SortSelector
                 onSelectedSort={(sortOrder) =>

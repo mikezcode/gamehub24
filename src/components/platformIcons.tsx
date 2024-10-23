@@ -1,5 +1,4 @@
-import { Box, HStack, Icon, Text } from "@chakra-ui/react";
-import React from "react";
+import { HStack, Icon } from "@chakra-ui/react";
 import {
   FaAndroid,
   FaLinux,
@@ -10,11 +9,9 @@ import {
 } from "react-icons/fa";
 
 import { MdPhoneIphone } from "react-icons/md";
-
 import { SiNintendoswitch } from "react-icons/si";
 import { IconType } from "react-icons";
 import { Platform } from "../hook/use-Game";
-// import { Platform } from "../service/game-service";
 interface Props {
   platforms: { platform: Platform }[];
 }
@@ -31,7 +28,7 @@ const iconMap: { [key: string]: IconType } = {
 };
 
 function PlatformIcons({ platforms }: Props) {
-  if(!platforms) return;
+  if (!platforms) return;
   return (
     <HStack gap={1}>
       {platforms.map(

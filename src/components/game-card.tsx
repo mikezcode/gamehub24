@@ -16,8 +16,6 @@ interface Props {
   game: Game;
 }
 function GameCard({ game }: Props) {
- ;
-   
   return (
     <Card
       maxW={"449px"}

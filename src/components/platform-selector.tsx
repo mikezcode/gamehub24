@@ -20,8 +20,8 @@ export const PlatformSelector = ({
   selectedPlatform,
 }: Props) => {
   const { data: platforms, err } = usePlatform();
-  if (err) return;
-  
+  if (err) return null;
+  else
     return (
       <Menu>
         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>

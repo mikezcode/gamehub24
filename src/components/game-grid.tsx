@@ -1,18 +1,14 @@
-import { Grid, useMediaQuery } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 import GameCard from "./game-card";
-import useGame, { Platform } from "../hook/use-Game";
+import useGame from "../hook/use-Game";
 import GameCardSkeleton from "./game-card-skeleton";
-import { Genre } from "../hook/use-genre";
 import { GameQuery } from "../App";
 interface Props {
-  // selectedGenre: Genre | null;
-  // selectedPlatform:Platform | null 
   gameQuery: GameQuery
 }
 
 
 const GameGrid = ({ gameQuery }: Props) => {
-  const [lgscreen] = useMediaQuery("(min-width: 978px)");
   const { data, isLoading } = useGame(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
  
@@ -20,7 +16,7 @@ const GameGrid = ({ gameQuery }: Props) => {
     <Grid
       justifyItems={"center"}
       templateColumns={
-        lgscreen ? "repeat(auto-fit, minmax(300px, auto))" : "1fr"
+       { base : "1fr", lg : "repeat(auto-fit, minmax(300px, auto))",}
       }
       gridGap={"24px"}
     >
