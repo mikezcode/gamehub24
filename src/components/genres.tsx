@@ -1,4 +1,4 @@
-import { Box, Heading, Link, Spinner } from "@chakra-ui/react";
+import { Box, Heading, Link, Spinner, Text } from "@chakra-ui/react";
 
 import useGenre, { Genre } from "../hook/use-genre";
 import GenreComp from "./genre";
@@ -9,7 +9,7 @@ interface Props {
 
 const Genres = ({ handleSelectedGenre }:Props) => {
   const { data, isLoading } = useGenre();
-
+ 
   if (isLoading) return <Spinner size="xl" color="green.300" />;
   else
     return (

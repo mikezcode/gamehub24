@@ -15,11 +15,12 @@ export const SortSelector = ({ onSelectedSort, selectedSort }: Props) => {
     { name: "-rating", label: "Rating" },
     { name: "-metacritic", label: "Popularity" },
   ];
+  const selectedLabel = sortList.find(sort=> sort.name===selectedSort)
 
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-        {`order by: ${sortList.filter(sort=>sort.name===selectedSort)[0]?.label || 'Relevance'} `}
+        {`order by: ${selectedLabel?.label ?? 'Relevance'} `}
       </MenuButton>
       <MenuList>
         {sortList.map(sort => (
