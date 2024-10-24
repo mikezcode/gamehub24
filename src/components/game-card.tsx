@@ -22,7 +22,6 @@ function GameCard({ game }: Props) {
       maxW={"449px"}
       w={"100%"}
       height={"fit-content"}
-      // m={"10px"}
       display={"flex"}
       flexDirection={"column"}
       boxShadow={"xl"}
