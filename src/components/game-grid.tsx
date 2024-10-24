@@ -23,12 +23,12 @@ const GameGrid = ({ gameQuery }: Props) => {
     >
       {isLoading &&
         skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
-      {!data.length && (
+      {/* {(!data.length && !isLoading) && (
         <Heading  size={'lg'}>
           Your search - {gameQuery.searchText} - did not match any
           games.
         </Heading>
-      )}
+      )} */}
       {data.map((game) => (
         <GameCard key={game.id} game={game} />
       ))}

@@ -1,5 +1,5 @@
 import "./App.css";
-import SearchBar from "./components/search-bar";
+import SearchBar from "./components/nav-bar";
 import { Box, Flex, Heading, Show, SimpleGrid } from "@chakra-ui/react";
 import { Platform } from "./hook/use-Game";
 import GameGrid from "./components/game-grid";
