@@ -16,7 +16,6 @@ interface Props {
   game: Game;
 }
 function GameCard({ game }: Props) {
-  console.log(game.rating_top);
   
   return (
     <Card
