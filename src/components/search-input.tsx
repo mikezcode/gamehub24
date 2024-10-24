@@ -10,10 +10,8 @@ interface Props {
  const SearchInput = ({onGameSearch}:Props) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const bg = useColorModeValue("#D1D2D5", "#3a3a3a");
-  const [searchInput, setSearchInput] = useState("");
-
- 
+  const bg = useColorModeValue("#f1f1f1", "#3a3a3a");
+  const [searchInput, setSearchInput] = useState(""); 
 
   return (
     <form onSubmit={e=>{
@@ -65,6 +63,7 @@ interface Props {
               setSearchInput("");
               onGameSearch("");
             }}
+            boxSize={3}
           />
         </InputRightElement>
       </InputGroup>
