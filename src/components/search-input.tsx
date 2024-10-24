@@ -10,7 +10,7 @@ interface Props {
  const SearchInput = ({onGameSearch}:Props) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const bg = useColorModeValue("#D1D2D5", "#2D3748");
+  const bg = useColorModeValue("#D1D2D5", "#3a3a3a");
   const [searchInput, setSearchInput] = useState("");
 
  
