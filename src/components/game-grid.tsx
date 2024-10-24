@@ -1,4 +1,4 @@
-import { Grid } from "@chakra-ui/react";
+import { Grid, Heading } from "@chakra-ui/react";
 import GameCard from "./game-card";
 import useGame from "../hook/use-Game";
 import GameCardSkeleton from "./game-card-skeleton";
@@ -15,13 +15,20 @@ const GameGrid = ({ gameQuery }: Props) => {
   return (
     <Grid
       justifyItems={"center"}
-      templateColumns={
-       { base : "1fr", lg : "repeat(auto-fit, minmax(300px, auto))",}
-      }
+      templateColumns={{
+        base: "1fr",
+        lg: "repeat(auto-fit, minmax(300px, auto))",
+      }}
       gridGap={"24px"}
     >
       {isLoading &&
         skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
+      {!data.length && (
+        <Heading  size={'lg'}>
+          Your search - {gameQuery.searchText} - did not match any
+          games.
+        </Heading>
+      )}
       {data.map((game) => (
         <GameCard key={game.id} game={game} />
       ))}
