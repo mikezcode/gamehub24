@@ -20,15 +20,23 @@ import { HamburgerIcon, SearchIcon, CloseIcon } from "@chakra-ui/icons";
 
 import { ReactNode, useRef, useState } from "react";
 import SearchInput from "./search-input";
+import { Genre } from "../hook/use-genre";
+import Genres from "./genres";
 
 interface Props {
-  children: ReactNode;
+  // children: ReactNode;
   onGameSearch: (searchText: string) => void;
+  handleSelectedGenre: (genre: Genre | null) => void;
+  selectedGenre: Genre | null;
 }
 
-const SearchBar = ({ children,onGameSearch}: Props) => {
+const NavBar = ({
+  onGameSearch,
+  handleSelectedGenre,
+  selectedGenre,
+}: Props) => {
   const { isOpen, onToggle } = useDisclosure();
-  const { toggleColorMode } = useColorMode(); 
+  const { toggleColorMode } = useColorMode();
 
   return (
     <Box p={"24px 15px"}>
@@ -42,7 +50,7 @@ const SearchBar = ({ children,onGameSearch}: Props) => {
           >
             RAWG
           </Link>
-          <SearchInput onGameSearch={onGameSearch}/>
+          <SearchInput onGameSearch={onGameSearch} />
           <Switch colorScheme="green" onChange={toggleColorMode} />
           <Show below="lg">
             <HamburgerIcon cursor={"pointer"} boxSize={8} onClick={onToggle} />
@@ -57,11 +65,17 @@ const SearchBar = ({ children,onGameSearch}: Props) => {
           transition={"1s ease-in all"}
           alignItems={"start"}
         >
-          {children}
+          <Genres
+            handleSelectedGenre={(genre) => {
+              handleSelectedGenre(genre);
+              onToggle();
+            }}
+            selectedGenre={selectedGenre}
+          />
         </VStack>
       </Collapse>
     </Box>
   );
 };
 
-export default SearchBar;
+export default NavBar;

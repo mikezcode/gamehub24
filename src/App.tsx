@@ -1,6 +1,6 @@
 import "./App.css";
-import SearchBar from "./components/nav-bar";
-import { Box, Flex, Heading, Show, SimpleGrid } from "@chakra-ui/react";
+import NavBar from "./components/nav-bar";
+import { Box, Flex, Grid, GridItem, Heading, Hide, Show, SimpleGrid } from "@chakra-ui/react";
 import { Platform } from "./hook/use-Game";
 import GameGrid from "./components/game-grid";
 import Genres from "./components/genres";
@@ -20,22 +20,27 @@ function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
   return (
-    <>
-      <SearchBar
-        onGameSearch={(searchText) =>
-          setGameQuery({ ...gameQuery, searchText })
-        }
-      >
-        <Genres
+    <Grid
+      gridTemplate={{
+        base: `"nav" "main" /1fr`,
+        lg: ` "nav nav" 
+             "side main" / 200px 1fr`,
+      }}
+      // templateColumns={{ base: "1fr", lg: "200px 1fr" }}
+      justifyContent={"center"}
+      m={3}
+   
+    >
+      <GridItem gridArea={"nav"}>
+        <NavBar
+          onGameSearch={(searchText) =>
+            setGameQuery({ ...gameQuery, searchText })
+          }
           handleSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
           selectedGenre={gameQuery.genre}
         />
-      </SearchBar>
-      <SimpleGrid
-        columns={{ lg: 2, base: 1 }}
-        templateColumns={{ base: "1fr", lg: "220px 1fr" }}
-        px={"15px"}
-      >
+      </GridItem>
+      <GridItem gridArea={"side"}>
         <Show above="lg">
           <Genres
             handleSelectedGenre={(genre) =>
@@ -44,43 +49,44 @@ function App() {
             selectedGenre={gameQuery.genre}
           />
         </Show>
+      </GridItem>
+      <GridItem gridArea={"main"} m={3}>
+        <Box>
+          <Heading
+            fontSize={"5xl"}
+            textAlign={{base:'center',lg:'left'}}
+            // maxW={{ base: "449px", lg: "100%" }}
+            // marginInline={{ base: "auto", lg: "0" }}
+          >
+            {`${gameQuery.genre?.name ?? ""}  ${
+              gameQuery.platform?.name ?? ""
+            } `}
+            Games
+          </Heading>
 
-        <SimpleGrid templateRows={"auto auto"} ml={0} alignContent={"start"}>
-          <Box>
-            <Heading
-              fontSize={"5xl"}
-              textAlign={{ base: "center", lg: "left" }}
-            >
-              {`${gameQuery.genre?.name ?? ""}  ${
-                gameQuery.platform?.name ?? ""
-              } `}
-              Games
-            </Heading>
-
-            <Flex
-              my={5}
-              flexWrap={"wrap"}
-              gap={2}
-              justify={{ base: "center", lg: "start" }}
-            >
-              <SortSelector
-                onSelectedSort={(sortOrder) =>
-                  setGameQuery({ ...gameQuery, sortOrder })
-                }
-                selectedSort={gameQuery.sortOrder}
-              />
-              <PlatformSelector
-                selectedPlatform={gameQuery.platform}
-                onSelectPlatform={(platform) =>
-                  setGameQuery({ ...gameQuery, platform })
-                }
-              />
-            </Flex>
-          </Box>
-          <GameGrid gameQuery={gameQuery} />
-        </SimpleGrid>
-      </SimpleGrid>
-    </>
+          <Flex
+            my={5}
+            flexWrap={"wrap"}
+            gap={2}
+            justify={{ base: "center", lg: "start" }}
+          >
+            <SortSelector
+              onSelectedSort={(sortOrder) =>
+                setGameQuery({ ...gameQuery, sortOrder })
+              }
+              selectedSort={gameQuery.sortOrder}
+            />
+            <PlatformSelector
+              selectedPlatform={gameQuery.platform}
+              onSelectPlatform={(platform) =>
+                setGameQuery({ ...gameQuery, platform })
+              }
+            />
+          </Flex>
+        </Box>
+        <GameGrid gameQuery={gameQuery} />
+      </GridItem>
+    </Grid>
   );
 }
 
