@@ -30,7 +30,7 @@ const iconMap: { [key: string]: IconType } = {
 function PlatformIcons({ platforms }: Props) {
   if (!platforms) return;
   return (
-    <HStack gap={3}>
+    <HStack gap={'6px'}>
       {platforms.map(
         ({ platform }) =>
           iconMap[platform.slug] && (

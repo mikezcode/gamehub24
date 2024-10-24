@@ -45,7 +45,6 @@ function GameCard({ game }: Props) {
             px={2}
             rounded={"md"}
             color={"green.300"}
-            // border={"0.75px solid #6DC849"}
             fontSize={"14px"}
             fontWeight={"700"}
           >
