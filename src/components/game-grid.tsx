@@ -1,4 +1,4 @@
-import { Grid, Heading } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 import GameCard from "./game-card";
 import useGame from "../hook/use-Game";
 import GameCardSkeleton from "./game-card-skeleton";
