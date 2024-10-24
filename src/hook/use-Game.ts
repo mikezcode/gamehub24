@@ -20,6 +20,7 @@ export interface Game {
   suggestions_count: number;
   added: number;
   rating: number;
+  rating_top:number
 }
 
 const useGame = (gameQuery: GameQuery) => {
