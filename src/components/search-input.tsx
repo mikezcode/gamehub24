@@ -1,6 +1,6 @@
 import { SearchIcon, CloseIcon } from '@chakra-ui/icons';
 import { InputGroup, InputLeftElement, Input, InputRightElement, useColorModeValue } from '@chakra-ui/react';
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 
 interface Props {

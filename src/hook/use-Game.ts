@@ -1,4 +1,3 @@
-import { AxiosRequestConfig } from "axios";
 import useData from "./use-Data";
 import { Genre } from "./use-genre";
 import { GameQuery } from "../App";

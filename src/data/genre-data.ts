@@ -1,4 +1,3 @@
-import { Genre } from "../hook/use-genre";
 
 export default [
   {

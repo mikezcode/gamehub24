@@ -2,7 +2,6 @@
 
 // 1. import `extendTheme` function
 import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
-import { color } from "framer-motion";
 
 // 2. Add your color mode config
 const config: ThemeConfig = {

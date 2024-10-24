@@ -3,22 +3,15 @@ import {
   Collapse,
   Flex,
   HStack,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
   Link,
   Show,
   Switch,
   useColorMode,
-  useColorModeValue,
   useDisclosure,
-  useMediaQuery,
   VStack,
 } from "@chakra-ui/react";
-import { HamburgerIcon, SearchIcon, CloseIcon } from "@chakra-ui/icons";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
-import { ReactNode, useRef, useState } from "react";
 import SearchInput from "./search-input";
 import { Genre } from "../hook/use-genre";
 import Genres from "./genres";
