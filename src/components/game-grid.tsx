@@ -1,4 +1,4 @@
-import { Grid } from "@chakra-ui/react";
+import { Grid, Text } from "@chakra-ui/react";
 import GameCard from "./game-card";
 import useGame from "../hook/use-Game";
 import GameCardSkeleton from "./game-card-skeleton";
@@ -9,9 +9,9 @@ interface Props {
 
 
 const GameGrid = ({ gameQuery }: Props) => {
-  const { data, isLoading } = useGame(gameQuery);
+  const { data, isLoading,error } = useGame(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
- 
+  if(error) return <Text>{error.message}</Text>
   return (
     <Grid
       justifyItems={"center"}
@@ -29,7 +29,7 @@ const GameGrid = ({ gameQuery }: Props) => {
           games.
         </Heading>
       )} */}
-      {data.map((game) => (
+      {data?.results.map((game) => (
         <GameCard key={game.id} game={game} />
       ))}
     </Grid>
