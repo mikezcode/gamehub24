@@ -17,8 +17,8 @@ interface Props {
 const Genres = ({ handleSelectedGenre, selectedGenre }: Props) => {
   const { data, isLoading } = useGenre();
 
-  if (isLoading) return <Spinner size="xl" color="green.300" />;
-  else
+  // if (isLoading) return <Spinner size="xl" color="green.300" />;
+  // else
     return (
       <Box>
         <Link onClick={() => handleSelectedGenre(null)}>
@@ -26,7 +26,7 @@ const Genres = ({ handleSelectedGenre, selectedGenre }: Props) => {
             Genres
           </Heading>
         </Link>
-        {data.map((genre) => (
+        { data.results?.map((genre) => (
           <Link onClick={() => handleSelectedGenre(genre)} key={genre.id}>
             <HStack align={"center"} mb={3}>
               <Image

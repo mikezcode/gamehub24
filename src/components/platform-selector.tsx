@@ -19,8 +19,8 @@ export const PlatformSelector = ({
   onSelectPlatform,
   selectedPlatform,
 }: Props) => {
-  const { data: platforms, err } = usePlatform();
-  if (err) return null;
+  const { data: platforms, error } = usePlatform();
+  if (error) return null;
   else
     return (
       <Menu>
@@ -36,7 +36,7 @@ export const PlatformSelector = ({
             {" "}
             clear{" "}
           </MenuItem>
-          {platforms.map((platform) => (
+          {platforms.results.map((platform) => (
             <MenuItem
               key={platform.id}
               onClick={() => onSelectPlatform(platform)}
