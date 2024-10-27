@@ -7,8 +7,8 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import { Platform } from "../hook/use-Game";
-import usePlatform from "../hook/usePlatform";
+
+import usePlatform, { Platform } from "../hook/usePlatform";
 
 interface Props {
   onSelectPlatform: (selectedPlatform: Platform | null) => void;
