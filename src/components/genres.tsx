@@ -17,7 +17,7 @@ interface Props {
 const Genres = ({ handleSelectedGenre, selectedGenre }: Props) => {
   const { data, isLoading } = useGenre();
 
-  // if (isLoading) return <Spinner size="xl" color="green.300" />;
+  if (isLoading) return <Spinner size="xl" color="green.300" />;
   // else
     return (
       <Box>
