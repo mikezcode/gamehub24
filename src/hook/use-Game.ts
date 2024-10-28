@@ -1,9 +1,7 @@
 import {
   InfiniteData,
-  keepPreviousData,
   QueryKey,
-  useInfiniteQuery,
-  useQuery,
+  useInfiniteQuery
 } from "@tanstack/react-query";
 import { GameQuery } from "../App";
 import ApiClient, { FetchDataResponse } from "../services/api-client";
@@ -24,9 +22,7 @@ export interface Game {
   rating_top: number;
 }
 
-const apiClient = new ApiClient<Game>("/games");
-const pageSize = 3;
-
+const apiClient = new ApiClient<Game>("/games"); 
 const useGame = (gameQuery: GameQuery) => {
   return useInfiniteQuery<
     FetchDataResponse<Game>,
@@ -39,8 +35,8 @@ const useGame = (gameQuery: GameQuery) => {
     queryFn: ({ pageParam }) =>
       apiClient.getAll({
         params: {
-          genres: gameQuery.genre?.id,
-          parent_platforms: gameQuery.platform?.id,
+          genres: gameQuery.genreId,
+          parent_platforms: gameQuery.platformId,
           ordering: gameQuery.sortOrder,
           search: gameQuery.searchText,
           page: pageParam,

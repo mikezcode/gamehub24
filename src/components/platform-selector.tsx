@@ -8,11 +8,11 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 
-import usePlatform, { Platform } from "../hook/usePlatform";
+import usePlatform from "../hook/usePlatform";
 
 interface Props {
-  onSelectPlatform: (selectedPlatform: Platform | null) => void;
-  selectedPlatform: Platform | null;
+  onSelectPlatform: (selectedPlatform?: number) => void;
+  selectedPlatform?: number ;
 }
 
 export const PlatformSelector = ({
@@ -20,18 +20,21 @@ export const PlatformSelector = ({
   selectedPlatform,
 }: Props) => {
   const { data: platforms, error } = usePlatform();
+
+  const selectedPlatformName = platforms.results.find(p=> p.id===selectedPlatform)?.name ?? ""
+
   if (error) return null;
   else
     return (
       <Menu>
         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-          {selectedPlatform ? selectedPlatform.name : "Platforms"}
+          {selectedPlatform ? selectedPlatformName : "Platforms"}
         </MenuButton>
         <MenuList>
           <MenuItem
             color={"red"}
             as={Link}
-            onClick={() => onSelectPlatform(null)}
+            onClick={() => onSelectPlatform()}
           >
             {" "}
             clear{" "}
@@ -39,7 +42,7 @@ export const PlatformSelector = ({
           {platforms.results.map((platform) => (
             <MenuItem
               key={platform.id}
-              onClick={() => onSelectPlatform(platform)}
+              onClick={() => onSelectPlatform(platform.id)}
             >
               {platform.name}
             </MenuItem>

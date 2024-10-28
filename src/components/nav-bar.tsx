@@ -1,3 +1,4 @@
+import { HamburgerIcon } from "@chakra-ui/icons";
 import {
   Box,
   Collapse,
@@ -10,23 +11,21 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
 
-import SearchInput from "./search-input";
-import { Genre } from "../hook/use-genre";
 import Genres from "./genres";
+import SearchInput from "./search-input";
 
 interface Props {
   // children: ReactNode;
   onGameSearch: (searchText: string) => void;
-  handleSelectedGenre: (genre: Genre | null) => void;
-  selectedGenre: Genre | null;
+  handleSelectedGenre: (genreId?: number) => void;
+  selectedGenreId?: number;
 }
 
 const NavBar = ({
   onGameSearch,
   handleSelectedGenre,
-  selectedGenre,
+  selectedGenreId,
 }: Props) => {
   const { isOpen, onToggle } = useDisclosure();
   const { toggleColorMode } = useColorMode();
@@ -63,7 +62,7 @@ const NavBar = ({
               handleSelectedGenre(genre);
               onToggle();
             }}
-            selectedGenre={selectedGenre}
+            selectedGenreId={selectedGenreId}
           />
         </VStack>
       </Collapse>

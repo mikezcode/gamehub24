@@ -1,24 +1,32 @@
+import { Box, Flex, Grid, GridItem, Heading, Show } from "@chakra-ui/react";
+import { useState } from "react";
 import "./App.css";
-import NavBar from "./components/nav-bar";
-import { Box, Button, Flex, Grid, GridItem, Heading, Show } from "@chakra-ui/react";
 import GameGrid from "./components/game-grid";
 import Genres from "./components/genres";
-import { useState } from "react";
-import { Genre } from "./hook/use-genre";
+import NavBar from "./components/nav-bar";
 import { PlatformSelector } from "./components/platform-selector";
 import { SortSelector } from "./components/sort-selector";
-import { Platform } from "./hook/usePlatform";
+import useGenre from "./hook/use-genre";
+import usePlatform from "./hook/usePlatform";
 
 export interface GameQuery {
-  genre: Genre | null;
-  platform: Platform | null;
+  genreId?: number;
+  platformId?: number;
   sortOrder: string;
   searchText: string;
 }
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+  const { data } = useGenre();
+  const selectedGenreName = data.results.find(
+    (genre) => genre.id === gameQuery.genreId
+  )?.name;
 
+  const { data: platforms } = usePlatform();
+
+  const selectedPlatformName =
+    platforms.results.find((p) => p.id === gameQuery.platformId)?.name;
   return (
     <Grid
       gridTemplate={{
@@ -35,17 +43,19 @@ function App() {
           onGameSearch={(searchText) =>
             setGameQuery({ ...gameQuery, searchText })
           }
-          handleSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
-          selectedGenre={gameQuery.genre}
+          handleSelectedGenre={(genre) =>
+            setGameQuery({ ...gameQuery, genreId: genre })
+          }
+          selectedGenreId={gameQuery.genreId}
         />
       </GridItem>
       <GridItem gridArea={"side"}>
         <Show above="lg">
           <Genres
             handleSelectedGenre={(genre) =>
-              setGameQuery({ ...gameQuery, genre })
+              setGameQuery({ ...gameQuery, genreId: genre })
             }
-            selectedGenre={gameQuery.genre}
+            selectedGenreId={gameQuery.genreId}
           />
         </Show>
       </GridItem>
@@ -57,9 +67,7 @@ function App() {
             // maxW={{ base: "449px", lg: "100%" }}
             // marginInline={{ base: "auto", lg: "0" }}
           >
-            {`${gameQuery.genre?.name ?? ""}  ${
-              gameQuery.platform?.name ?? ""
-            } `}
+            {`${selectedGenreName ?? ""}  ${selectedPlatformName ?? ""} `}
             Games
           </Heading>
 
@@ -76,15 +84,14 @@ function App() {
               selectedSort={gameQuery.sortOrder}
             />
             <PlatformSelector
-              selectedPlatform={gameQuery.platform}
+              selectedPlatform={gameQuery.platformId}
               onSelectPlatform={(platform) =>
-                setGameQuery({ ...gameQuery, platform })
+                setGameQuery({ ...gameQuery, platformId: platform })
               }
             />
           </Flex>
         </Box>
-        <GameGrid gameQuery={gameQuery}  />
-       
+        <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
   );
