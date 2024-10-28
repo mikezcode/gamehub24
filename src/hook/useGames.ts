@@ -7,6 +7,7 @@ import { GameQuery } from "../App";
 import ApiClient, { FetchDataResponse } from "../services/apiClient";
 import { Genre } from "./useGenres";
 import { Platform } from "./usePlatforms";
+import ms from "ms";
 
 export interface Game {
   id: number;
@@ -47,7 +48,7 @@ const useGames = (gameQuery: GameQuery) => {
     },
     // placeholderData: keepPreviousData,
     initialPageParam: 1,
-    staleTime: 24 * 3600 * 1000,
+    staleTime: ms('24h'),
   });
 };
 export default useGames;

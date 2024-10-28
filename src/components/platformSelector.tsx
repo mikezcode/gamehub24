@@ -34,7 +34,7 @@ export const PlatformSelector = ({
             {" "}
             clear{" "}
           </MenuItem>
-          {platforms.results.map((platform) => (
+          {platforms?.results.map((platform) => (
             <MenuItem
               key={platform.id}
               onClick={() => onSelectPlatform(platform.id)}
