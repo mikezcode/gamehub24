@@ -8,28 +8,26 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 
-import usePlatform from "../hook/usePlatforms";
+import usePlatforms from "../hook/usePlatforms";
+import usePlatform from "../hook/usePlatform";
 
 interface Props {
   onSelectPlatform: (selectedPlatform?: number) => void;
-  selectedPlatform?: number;
+  selectedPlatformId? : number;
 }
 
 export const PlatformSelector = ({
   onSelectPlatform,
-  selectedPlatform,
+  selectedPlatformId,
 }: Props) => {
-  const { data: platforms, error } = usePlatform();
-
-  const selectedPlatformName =
-    platforms.results.find((p) => p.id === selectedPlatform)?.name ?? "";
-
+  const { data: platforms, error } = usePlatforms();
+  const selectedPlatform = usePlatform(selectedPlatformId);
   if (error) return null;
   else
     return (
       <Menu>
         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-          {selectedPlatform ? selectedPlatformName : "Platforms"}
+          {selectedPlatformId ? selectedPlatform?.name : "Platforms"}
         </MenuButton>
         <MenuList>
           <MenuItem color={"red"} as={Link} onClick={() => onSelectPlatform()}>

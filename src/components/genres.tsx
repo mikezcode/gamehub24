@@ -8,7 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import useGenre from "../hook/useGenres";
+import useGenres from "../hook/useGenres";
 interface Props {
   handleSelectedGenre: (genre?: number) => void;
   selectedGenreId: number | undefined;
@@ -18,7 +18,7 @@ const Genres = ({
   handleSelectedGenre,
   selectedGenreId: selectedGenre,
 }: Props) => {
-  const { data, isLoading } = useGenre();
+  const { data, isLoading } = useGenres();
 
   if (isLoading) return <Spinner size="xl" color="green.300" />;
   // else

@@ -23,7 +23,7 @@ export interface Game {
 }
 
 const apiClient = new ApiClient<Game>("/games");
-const useGame = (gameQuery: GameQuery) => {
+const useGames = (gameQuery: GameQuery) => {
   return useInfiniteQuery<
     FetchDataResponse<Game>,
     Error,
@@ -50,4 +50,4 @@ const useGame = (gameQuery: GameQuery) => {
     staleTime: 24 * 3600 * 1000,
   });
 };
-export default useGame;
+export default useGames;

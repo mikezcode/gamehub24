@@ -6,8 +6,8 @@ import Genres from "./components/genres";
 import NavBar from "./components/navBar";
 import { PlatformSelector } from "./components/platformSelector";
 import { SortSelector } from "./components/sortSelector";
-import useGenre from "./hook/useGenres";
-import usePlatform from "./hook/usePlatforms";
+import useGenre from "./hook/useGenre";
+import usePlatform from "./hook/usePlatform";
 
 export interface GameQuery {
   genreId?: number;
@@ -18,16 +18,11 @@ export interface GameQuery {
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-  const { data } = useGenre();
-  const selectedGenreName = data.results.find(
-    (genre) => genre.id === gameQuery.genreId
-  )?.name;
+  
+  const selectedGenre = useGenre(gameQuery.genreId)
 
-  const { data: platforms } = usePlatform();
 
-  const selectedPlatformName = platforms.results.find(
-    (p) => p.id === gameQuery.platformId
-  )?.name;
+ const selected_platform = usePlatform(gameQuery.platformId);
   return (
     <Grid
       gridTemplate={{
@@ -68,7 +63,7 @@ function App() {
             // maxW={{ base: "449px", lg: "100%" }}
             // marginInline={{ base: "auto", lg: "0" }}
           >
-            {`${selectedGenreName ?? ""}  ${selectedPlatformName ?? ""} `}
+            {`${selectedGenre?.name ?? ""}  ${selected_platform?.name ?? ""} `}
             Games
           </Heading>
 
@@ -85,10 +80,11 @@ function App() {
               selectedSort={gameQuery.sortOrder}
             />
             <PlatformSelector
-              selectedPlatform={gameQuery.platformId}
+              selectedPlatformId={gameQuery.platformId}
               onSelectPlatform={(platform) =>
                 setGameQuery({ ...gameQuery, platformId: platform })
               }
+
             />
           </Flex>
         </Box>

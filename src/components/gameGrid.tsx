@@ -2,7 +2,7 @@ import { Grid, Spinner, Text } from "@chakra-ui/react";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { GameQuery } from "../App";
-import useGame from "../hook/useGames";
+import useGames from "../hook/useGames";
 import GameCard from "./gameCard";
 import GameCardSkeleton from "./gameCardSkeleton";
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 
 const GameGrid = ({ gameQuery }: Props) => {
   const { data, isLoading, error, fetchNextPage, hasNextPage } =
-    useGame(gameQuery);
+    useGames(gameQuery);
   const fetchedGameSofar =
     data?.pages.reduce((total, page) => total + page.results.length, 0) ?? 0;
 
