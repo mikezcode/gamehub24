@@ -8,7 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import useGenre from "../hook/use-genre";
+import useGenre from "../hook/useGenres";
 interface Props {
   handleSelectedGenre: (genre?: number) => void;
   selectedGenreId: number | undefined;

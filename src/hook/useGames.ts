@@ -1,12 +1,12 @@
 import {
   InfiniteData,
   QueryKey,
-  useInfiniteQuery
+  useInfiniteQuery,
 } from "@tanstack/react-query";
 import { GameQuery } from "../App";
-import ApiClient, { FetchDataResponse } from "../services/api-client";
-import { Genre } from "./use-genre";
-import { Platform } from "./usePlatform";
+import ApiClient, { FetchDataResponse } from "../services/apiClient";
+import { Genre } from "./useGenres";
+import { Platform } from "./usePlatforms";
 
 export interface Game {
   id: number;
@@ -22,7 +22,7 @@ export interface Game {
   rating_top: number;
 }
 
-const apiClient = new ApiClient<Game>("/games"); 
+const apiClient = new ApiClient<Game>("/games");
 const useGame = (gameQuery: GameQuery) => {
   return useInfiniteQuery<
     FetchDataResponse<Game>,

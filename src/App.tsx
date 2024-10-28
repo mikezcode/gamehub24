@@ -1,13 +1,13 @@
 import { Box, Flex, Grid, GridItem, Heading, Show } from "@chakra-ui/react";
 import { useState } from "react";
 import "./App.css";
-import GameGrid from "./components/game-grid";
+import GameGrid from "./components/gameGrid";
 import Genres from "./components/genres";
-import NavBar from "./components/nav-bar";
-import { PlatformSelector } from "./components/platform-selector";
-import { SortSelector } from "./components/sort-selector";
-import useGenre from "./hook/use-genre";
-import usePlatform from "./hook/usePlatform";
+import NavBar from "./components/navBar";
+import { PlatformSelector } from "./components/platformSelector";
+import { SortSelector } from "./components/sortSelector";
+import useGenre from "./hook/useGenres";
+import usePlatform from "./hook/usePlatforms";
 
 export interface GameQuery {
   genreId?: number;
@@ -25,8 +25,9 @@ function App() {
 
   const { data: platforms } = usePlatform();
 
-  const selectedPlatformName =
-    platforms.results.find((p) => p.id === gameQuery.platformId)?.name;
+  const selectedPlatformName = platforms.results.find(
+    (p) => p.id === gameQuery.platformId
+  )?.name;
   return (
     <Grid
       gridTemplate={{

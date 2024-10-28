@@ -9,14 +9,13 @@ import {
 
 import PlatformIcons from "./platformIcons";
 import { AddIcon } from "@chakra-ui/icons";
-import cropImage from "../services/image-url";
-import { Game } from "../hook/use-Game";
+import cropImage from "../services/imageUrl";
+import { Game } from "../hook/useGames";
 
 interface Props {
   game: Game;
 }
 function GameCard({ game }: Props) {
-  
   return (
     <Card
       maxW={"449px"}
@@ -51,9 +50,10 @@ function GameCard({ game }: Props) {
           </Badge>
         </HStack>
         <Heading fontSize={"30px"} lineHeight={"35px"} fontWeight={700} mt={3}>
-          {game.name} { game.rating_top ===4? "🎯": (game.rating_top===5 ? "👍": "")}
+          {game.name}{" "}
+          {game.rating_top === 4 ? "🎯" : game.rating_top === 5 ? "👍" : ""}
         </Heading>
-        <Badge 
+        <Badge
           py={1}
           px={2}
           fontWeight={500}

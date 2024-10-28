@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 
 import Genres from "./genres";
-import SearchInput from "./search-input";
+import SearchInput from "./searchInput";
 
 interface Props {
   // children: ReactNode;

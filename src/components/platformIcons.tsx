@@ -11,7 +11,7 @@ import {
 import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendoswitch } from "react-icons/si";
 import { IconType } from "react-icons";
-import { Platform } from "../hook/usePlatform";
+import { Platform } from "../hook/usePlatforms";
 interface Props {
   platforms: { platform: Platform }[];
 }
@@ -30,7 +30,7 @@ const iconMap: { [key: string]: IconType } = {
 function PlatformIcons({ platforms }: Props) {
   if (!platforms) return;
   return (
-    <HStack gap={'6px'}>
+    <HStack gap={"6px"}>
       {platforms.map(
         ({ platform }) =>
           iconMap[platform.slug] && (
@@ -38,7 +38,7 @@ function PlatformIcons({ platforms }: Props) {
               key={platform.id}
               as={iconMap[platform.slug]}
               color={"gray.400"}
-             boxSize={5}
+              boxSize={5}
             />
           )
       )}

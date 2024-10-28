@@ -1,6 +1,6 @@
-import { Game } from "../hook/use-Game";
-import ApiClient from "./api-client";
+import { Game } from "../hook/useGames";
+import ApiClient from "./apiClient";
 
- const gameService = new ApiClient<Game>("/games");
+const gameService = new ApiClient<Game>("/games");
 
-  export default gameService
+export default gameService;
