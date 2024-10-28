@@ -3,13 +3,31 @@ import GameCard from "./game-card";
 import useGame from "../hook/use-Game";
 import GameCardSkeleton from "./game-card-skeleton";
 import { GameQuery } from "../App";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 interface Props {
   gameQuery: GameQuery;
 }
 
 const GameGrid = ({ gameQuery }: Props) => {
   const { data, isLoading, error,fetchNextPage ,isFetchingNextPage,hasNextPage} = useGame(gameQuery);  
+
+  const loadMoreRef = useRef(null)
+  useEffect(() => {
+    if (!hasNextPage || isFetchingNextPage) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        fetchNextPage();
+      }
+    })
+
+    if (loadMoreRef.current) observer.observe(loadMoreRef.current);
+
+    return () => {
+      if (loadMoreRef.current) observer.unobserve(loadMoreRef.current);
+    };
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
   if (error) return <Text>{error.message}</Text>;
   return (
@@ -34,10 +52,13 @@ const GameGrid = ({ gameQuery }: Props) => {
         )}
       </Grid>
      
-     { hasNextPage && 
+     {/* { hasNextPage && 
      <Box maxW={"449px"} w={"100%"} mt={'24px'} justifySelf={{base:'center',lg:'start'}}>
         <Button onClick={() => fetchNextPage()}>{isFetchingNextPage? "Loading ... ": "Load More"}</Button>
-      </Box>}
+      </Box>} */}
+
+      <Box ref={loadMoreRef}>    
+      </Box>
     </>
   );
 };
