@@ -1,6 +1,6 @@
 import "./App.css";
 import NavBar from "./components/nav-bar";
-import { Box, Flex, Grid, GridItem, Heading, Show } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, GridItem, Heading, Show } from "@chakra-ui/react";
 import GameGrid from "./components/game-grid";
 import Genres from "./components/genres";
 import { useState } from "react";
@@ -29,7 +29,6 @@ function App() {
       // templateColumns={{ base: "1fr", lg: "200px 1fr" }}
       justifyContent={"center"}
       m={3}
-   
     >
       <GridItem gridArea={"nav"}>
         <NavBar
@@ -54,7 +53,7 @@ function App() {
         <Box>
           <Heading
             fontSize={"5xl"}
-            textAlign={{base:'center',lg:'left'}}
+            textAlign={{ base: "center", lg: "left" }}
             // maxW={{ base: "449px", lg: "100%" }}
             // marginInline={{ base: "auto", lg: "0" }}
           >
@@ -84,7 +83,8 @@ function App() {
             />
           </Flex>
         </Box>
-        <GameGrid gameQuery={gameQuery} />
+        <GameGrid gameQuery={gameQuery}  />
+       
       </GridItem>
     </Grid>
   );
