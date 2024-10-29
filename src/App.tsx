@@ -21,7 +21,6 @@ function App() {
   
   const selectedGenre = useGenre(gameQuery.genreId)
 
-
  const selected_platform = usePlatform(gameQuery.platformId);
   return (
     <Grid
