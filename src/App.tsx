@@ -8,13 +8,9 @@ import { PlatformSelector } from "./components/platformSelector";
 import { SortSelector } from "./components/sortSelector";
 import useGenre from "./hook/useGenre";
 import usePlatform from "./hook/usePlatform";
+// import { GameQuery } from "./store";
 
-export interface GameQuery {
-  genreId?: number;
-  platformId?: number;
-  sortOrder: string;
-  searchText: string;
-}
+
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
