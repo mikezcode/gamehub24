@@ -17,8 +17,6 @@ interface Props {
 const Genres = ({onToggle}:Props) => {
 
 console.log('genre renderedd');
-
-
   const { data, isLoading } = useGenres();
   const  setGenreId  = useGameQueryStore(s=>s.setGenreId);
   const  genreId = useGameQueryStore(s=>s.gameQuery.genreId);

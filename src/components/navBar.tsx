@@ -34,7 +34,7 @@ const NavBar = () => {
           >
             RAWG
           </Link>
-          <SearchInput/>
+          <SearchInput />
           <Switch colorScheme="green" onChange={toggleColorMode} />
           <Show below="lg">
             <HamburgerIcon cursor={"pointer"} boxSize={8} onClick={onToggle} />
@@ -49,9 +49,9 @@ const NavBar = () => {
           transition={"1s ease-in all"}
           alignItems={"start"}
         >
-          <Genres
-            onToggle={()=> onToggle()}           
-          />
+          <Show below="lg">
+            <Genres onToggle={() => onToggle()} />
+          </Show>
         </VStack>
       </Collapse>
     </Box>
