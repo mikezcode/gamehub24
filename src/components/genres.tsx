@@ -15,8 +15,13 @@ interface Props {
 }
 
 const Genres = ({onToggle}:Props) => {
+
+console.log('genre renderedd');
+
+
   const { data, isLoading } = useGenres();
-  const { gameQuery, setGenreId } = useGameQueryStore();
+  const { setGenreId } = useGameQueryStore();
+  const  genreId = useGameQueryStore(s=>s.gameQuery.genreId);
   if (isLoading) return <Spinner size="xl" color="green.300" />;
   // else
   return (
@@ -42,7 +47,7 @@ const Genres = ({onToggle}:Props) => {
               objectFit={"cover"}
             />
             <Text
-              color={genre.id === gameQuery.genreId ? "green.200" : "inherit"}
+              color={genre.id === genreId ? "green.200" : "inherit"}
               textDecoration={"none"}
               fontWeight={"500"}
             >

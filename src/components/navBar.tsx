@@ -20,9 +20,8 @@ import SearchInput from "./searchInput";
 const NavBar = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { toggleColorMode } = useColorMode();
- 
- 
- 
+  console.log('nav bar rendered');
+  
   return (
     <Box p={"24px 15px"}>
       <Flex display={"flex"} align={"center"} m={2} flexWrap={"wrap"}>
@@ -51,8 +50,7 @@ const NavBar = () => {
           alignItems={"start"}
         >
           <Genres
-            onToggle={()=> onToggle()}
-           
+            onToggle={()=> onToggle()}           
           />
         </VStack>
       </Collapse>

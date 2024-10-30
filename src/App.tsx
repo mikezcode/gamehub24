@@ -1,21 +1,12 @@
-import { Box, Flex, Grid, GridItem, Heading, Show } from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem, Show } from "@chakra-ui/react";
 import "./App.css";
+import DynamicHeading from "./components/dynamicHeading";
 import GameGrid from "./components/gameGrid";
 import Genres from "./components/genres";
 import NavBar from "./components/navBar";
 import { PlatformSelector } from "./components/platformSelector";
 import { SortSelector } from "./components/sortSelector";
-import useGenre from "./hook/useGenre";
-import usePlatform from "./hook/usePlatform";
-import useGameQueryStore from "./store";
-// import { GameQuery } from "./store";
-
-function App() {
-  // const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-  const { gameQuery, setSortOrder, setPlatformId } =
-    useGameQueryStore();
-  const selectedGenre = useGenre(gameQuery.genreId);
-  const selected_platform = usePlatform(gameQuery.platformId);
+function App() { 
   return (
     <Grid
       gridTemplate={{
@@ -23,12 +14,12 @@ function App() {
         lg: ` "nav nav" 
              "side main" / 200px 1fr`,
       }}
-      // templateColumns={{ base: "1fr", lg: "200px 1fr" }}
+      
       justifyContent={"center"}
       m={3}
     >
       <GridItem gridArea={"nav"}>
-        <NavBar/>
+        <NavBar />
       </GridItem>
       <GridItem gridArea={"side"}>
         <Show above="lg">
@@ -37,15 +28,7 @@ function App() {
       </GridItem>
       <GridItem gridArea={"main"} m={3}>
         <Box>
-          <Heading
-            fontSize={"5xl"}
-            textAlign={{ base: "center", lg: "left" }}
-            // maxW={{ base: "449px", lg: "100%" }}
-            // marginInline={{ base: "auto", lg: "0" }}
-          >
-            {`${selectedGenre?.name ?? ""}  ${selected_platform?.name ?? ""} `}
-            Games
-          </Heading>
+         <DynamicHeading/>
 
           <Flex
             my={5}
@@ -53,17 +36,11 @@ function App() {
             gap={2}
             justify={{ base: "center", lg: "start" }}
           >
-            <SortSelector
-              onSelectedSort={setSortOrder}
-              selectedSort={gameQuery.sortOrder}
-            />
-            <PlatformSelector
-              selectedPlatformId={gameQuery.platformId}
-              onSelectPlatform={setPlatformId}
-            />
+            <SortSelector />
+            <PlatformSelector />
           </Flex>
         </Box>
-        <GameGrid gameQuery={gameQuery} />
+        <GameGrid/>
       </GridItem>
     </Grid>
   );

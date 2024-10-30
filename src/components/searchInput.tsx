@@ -59,8 +59,7 @@ import useGameQueryStore from '../store';
             color={"#181818"}
             cursor={"pointer"}
             onClick={() => {
-              setSearchInput("");
-              setSearchText("");
+              setSearchInput("");           
             }}
             boxSize={3}
           />
