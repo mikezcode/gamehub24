@@ -19,7 +19,7 @@ interface Props {
 
 export const PlatformSelector = () => {
   const { data: platforms, error } = usePlatforms();
-  const { setPlatformId } = useGameQueryStore();
+  const  setPlatformId  = useGameQueryStore(s=>s.setPlatformId);
   const platformId = useGameQueryStore((s) => s.gameQuery.platformId);
   const selectedPlatform = usePlatform(platformId);
 

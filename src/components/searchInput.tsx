@@ -11,7 +11,7 @@ import useGameQueryStore from '../store';
   const inputRef = useRef<HTMLInputElement>(null);
   const bg = useColorModeValue("#f1f1f1", "#3a3a3a");
   const [searchInput, setSearchInput] = useState(""); 
-  const {setSearchText}= useGameQueryStore()
+  const setSearchText= useGameQueryStore(s=>s.setSearchText)
   return (
     <form onSubmit={e=>{
       e.preventDefault()

@@ -18,13 +18,13 @@ interface GameQueryStoreType {
 const useGameQueryStore = create<GameQueryStoreType>((set) => ({
   gameQuery: {} as GameQuery,
   setGenreId: (genreId) =>
-    set((state) => ({ gameQuery: { ...state.gameQuery, genreId } })),
+    set((store) => ({ gameQuery: { ...store.gameQuery, genreId } })),
   setPlatformId: (platformId) =>
-    set((state) => ({ gameQuery: { ...state.gameQuery, platformId } })),
-  setSortOrder: (sOrder) =>
-    set((state) => ({ gameQuery: { ...state.gameQuery, sortOrder: sOrder } })),
-  setSearchText: (sText) =>
-    set((state) => ({ gameQuery: { ...state.gameQuery, searchText: sText } })),
+    set((store) => ({ gameQuery: { ...store.gameQuery, platformId } })),
+  setSortOrder: (sortOrder) =>
+    set((store) => ({ gameQuery: { ...store.gameQuery, sortOrder } })),
+  setSearchText: (searchText) =>
+    set((store) => ({ gameQuery: { ...store.gameQuery, searchText } })),
 }));
 
 export default useGameQueryStore;

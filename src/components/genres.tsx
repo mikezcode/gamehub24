@@ -20,7 +20,7 @@ console.log('genre renderedd');
 
 
   const { data, isLoading } = useGenres();
-  const { setGenreId } = useGameQueryStore();
+  const  setGenreId  = useGameQueryStore(s=>s.setGenreId);
   const  genreId = useGameQueryStore(s=>s.gameQuery.genreId);
   if (isLoading) return <Spinner size="xl" color="green.300" />;
   // else

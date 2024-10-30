@@ -15,7 +15,7 @@ export const SortSelector = () => {
   ];
   console.log("sort rendered");
   
-  const {setSortOrder } = useGameQueryStore();
+  const setSortOrder  = useGameQueryStore(s=>s.setSortOrder);
   const sortOrder = useGameQueryStore(s=>s.gameQuery.sortOrder);
   const selectedLabel = sortList.find(sort=> sort.name===sortOrder)
   return (
