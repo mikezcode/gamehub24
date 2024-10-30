@@ -1,22 +1,21 @@
 import { SearchIcon, CloseIcon } from '@chakra-ui/icons';
 import { InputGroup, InputLeftElement, Input, InputRightElement, useColorModeValue } from '@chakra-ui/react';
 import { useRef, useState } from 'react'
+import useGameQueryStore from '../store';
 
 
-interface Props {
-  onGameSearch: (searchText: string) => void;
-}
 
- const SearchInput = ({onGameSearch}:Props) => {
+
+ const SearchInput = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const bg = useColorModeValue("#f1f1f1", "#3a3a3a");
   const [searchInput, setSearchInput] = useState(""); 
-
+  const {setSearchText}= useGameQueryStore()
   return (
     <form onSubmit={e=>{
       e.preventDefault()
-      onGameSearch(searchInput);
+      setSearchText(searchInput);
     }}>
       <InputGroup
         bg={bg}
@@ -61,7 +60,7 @@ interface Props {
             cursor={"pointer"}
             onClick={() => {
               setSearchInput("");
-              onGameSearch("");
+              setSearchText("");
             }}
             boxSize={3}
           />

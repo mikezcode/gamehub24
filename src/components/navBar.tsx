@@ -15,21 +15,14 @@ import {
 import Genres from "./genres";
 import SearchInput from "./searchInput";
 
-interface Props {
-  // children: ReactNode;
-  onGameSearch: (searchText: string) => void;
-  handleSelectedGenre: (genreId?: number) => void;
-  selectedGenreId?: number;
-}
 
-const NavBar = ({
-  onGameSearch,
-  handleSelectedGenre,
-  selectedGenreId,
-}: Props) => {
+
+const NavBar = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { toggleColorMode } = useColorMode();
-
+ 
+ 
+ 
   return (
     <Box p={"24px 15px"}>
       <Flex display={"flex"} align={"center"} m={2} flexWrap={"wrap"}>
@@ -42,7 +35,7 @@ const NavBar = ({
           >
             RAWG
           </Link>
-          <SearchInput onGameSearch={onGameSearch} />
+          <SearchInput/>
           <Switch colorScheme="green" onChange={toggleColorMode} />
           <Show below="lg">
             <HamburgerIcon cursor={"pointer"} boxSize={8} onClick={onToggle} />
@@ -58,11 +51,8 @@ const NavBar = ({
           alignItems={"start"}
         >
           <Genres
-            handleSelectedGenre={(genre) => {
-              handleSelectedGenre(genre);
-              onToggle();
-            }}
-            selectedGenreId={selectedGenreId}
+            onToggle={()=> onToggle()}
+           
           />
         </VStack>
       </Collapse>
@@ -71,3 +61,4 @@ const NavBar = ({
 };
 
 export default NavBar;
+

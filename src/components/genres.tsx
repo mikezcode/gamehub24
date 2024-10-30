@@ -9,28 +9,30 @@ import {
 } from "@chakra-ui/react";
 
 import useGenres from "../hook/useGenres";
+import useGameQueryStore from "../store";
 interface Props {
-  handleSelectedGenre: (genre?: number) => void;
-  selectedGenreId: number | undefined;
+  onToggle?: ()=> void
 }
 
-const Genres = ({
-  handleSelectedGenre,
-  selectedGenreId: selectedGenre,
-}: Props) => {
+const Genres = ({onToggle}:Props) => {
   const { data, isLoading } = useGenres();
-
+  const { gameQuery, setGenreId } = useGameQueryStore();
   if (isLoading) return <Spinner size="xl" color="green.300" />;
   // else
   return (
     <Box>
-      <Link onClick={() => handleSelectedGenre()}>
+      <Link onClick={() => setGenreId()}>
         <Heading fontSize={"24px"} fontWeight={700} color={"white"} mb={4}>
           Genres
         </Heading>
       </Link>
       {data.results?.map((genre) => (
-        <Link onClick={() => handleSelectedGenre(genre.id)} key={genre.id}>
+        <Link onClick={() =>{
+           setGenreId(genre.id)
+            if(onToggle) onToggle()         
+          } 
+          }
+           key={genre.id}>
           <HStack align={"center"} mb={3}>
             <Image
               borderColor={"none"}
@@ -40,7 +42,7 @@ const Genres = ({
               objectFit={"cover"}
             />
             <Text
-              color={genre.id === selectedGenre ? "green.200" : "inherit"}
+              color={genre.id === gameQuery.genreId ? "green.200" : "inherit"}
               textDecoration={"none"}
               fontWeight={"500"}
             >
