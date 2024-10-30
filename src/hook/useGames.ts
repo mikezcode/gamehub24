@@ -3,11 +3,11 @@ import {
   QueryKey,
   useInfiniteQuery,
 } from "@tanstack/react-query";
+import ms from "ms";
 import ApiClient, { FetchDataResponse } from "../services/apiClient";
+import useGameQueryStore from "../store";
 import { Genre } from "./useGenres";
 import { Platform } from "./usePlatforms";
-import ms from "ms";
-import { GameQuery } from "../store";
 
 export interface Game {
   id: number;
@@ -24,7 +24,8 @@ export interface Game {
 }
 
 const apiClient = new ApiClient<Game>("/games");
-const useGames = (gameQuery: GameQuery) => {
+const useGames = () => {
+  const  gameQuery  = useGameQueryStore(s=>s.gameQuery);
   return useInfiniteQuery<
     FetchDataResponse<Game>,
     Error,
