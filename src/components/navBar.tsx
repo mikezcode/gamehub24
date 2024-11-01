@@ -15,12 +15,9 @@ import {
 import Genres from "./genres";
 import SearchInput from "./searchInput";
 
-
-
 const NavBar = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { toggleColorMode } = useColorMode();
-  console.log('nav bar rendered');
   
   return (
     <Box p={"24px 15px"}>

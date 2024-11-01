@@ -3,9 +3,6 @@ import { InputGroup, InputLeftElement, Input, InputRightElement, useColorModeVal
 import { useRef, useState } from 'react'
 import useGameQueryStore from '../store';
 
-
-
-
  const SearchInput = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);

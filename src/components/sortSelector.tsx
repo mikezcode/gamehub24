@@ -2,8 +2,6 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import useGameQueryStore from "../store";
 
-
-
 export const SortSelector = () => {
   const sortList = [
     { name: "", label: "Relevance" },
@@ -13,8 +11,7 @@ export const SortSelector = () => {
     { name: "-rating", label: "Rating" },
     { name: "-metacritic", label: "Popularity" },
   ];
-  console.log("sort rendered");
-  
+ 
   const setSortOrder  = useGameQueryStore(s=>s.setSortOrder);
   const sortOrder = useGameQueryStore(s=>s.gameQuery.sortOrder);
   const selectedLabel = sortList.find(sort=> sort.name===sortOrder)

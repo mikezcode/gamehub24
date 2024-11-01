@@ -18,9 +18,6 @@ export const PlatformSelector = () => {
   const platformId = useGameQueryStore((s) => s.gameQuery.platformId);
   const selectedPlatform = usePlatform(platformId);
 
-  console.log('platform+rendered');
-  
-
   if (error) return null;
   else
     return (
