@@ -13,7 +13,7 @@ import useGameQueryStore from '../store';
     <form onSubmit={e=>{
       e.preventDefault()
       setSearchText(searchInput);
-    }}>
+    }} >
       <InputGroup
         bg={bg}
         borderRadius={"30px"}

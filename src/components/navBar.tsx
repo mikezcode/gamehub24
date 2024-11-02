@@ -7,6 +7,7 @@ import {
   Link,
   Show,
   Switch,
+  Text,
   useColorMode,
   useDisclosure,
   VStack,
@@ -14,11 +15,17 @@ import {
 
 import Genres from "./genres";
 import SearchInput from "./searchInput";
+import useGameQueryStore from "../store";
 
 const NavBar = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { toggleColorMode } = useColorMode();
-  
+   const setGenreId = useGameQueryStore((s) => s.setGenreId);
+   const setPlatformId = useGameQueryStore((s) => s.setPlatformId);
+  const setSearchText = useGameQueryStore((s) => s.setSearchText);
+  const setSortOrder = useGameQueryStore((s) => s.setSortOrder);
+
+
   return (
     <Box p={"24px 15px"}>
       <Flex display={"flex"} align={"center"} m={2} flexWrap={"wrap"}>
@@ -28,18 +35,31 @@ const NavBar = () => {
             fontSize={"2xl"}
             fontWeight={700}
             _hover={{ textDecoration: "none" }}
+            onClick={() => {
+              setSearchText("");
+              setGenreId();
+              setPlatformId();
+              setSortOrder("");
+            }}
           >
             RAWG
           </Link>
           <SearchInput />
-          <Switch colorScheme="green" onChange={toggleColorMode} />
           <Show below="lg">
             <HamburgerIcon cursor={"pointer"} boxSize={8} onClick={onToggle} />
           </Show>
         </HStack>
-        <Box ml={"auto"}></Box>
       </Flex>
       <Collapse in={isOpen}>
+        <HStack alignItems={"center"} m={2} p={"2rem"}>
+          <Switch
+            colorScheme="green"
+            onChange={toggleColorMode}
+            alignSelf={"center"}
+            mr={5}
+          />
+          <Text> Dark Mode</Text>
+        </HStack>
         <VStack
           m={2}
           p={"2rem"}
