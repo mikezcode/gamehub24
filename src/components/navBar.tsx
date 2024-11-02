@@ -13,9 +13,9 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
+import useGameQueryStore from "../store";
 import Genres from "./genres";
 import SearchInput from "./searchInput";
-import useGameQueryStore from "../store";
 
 const NavBar = () => {
   const { isOpen, onToggle } = useDisclosure();

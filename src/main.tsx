@@ -5,7 +5,6 @@ import App from './App.tsx'
 import './index.css'
 import theme from './theme/theme.ts'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools/production'
 
 const client = new QueryClient();
 
