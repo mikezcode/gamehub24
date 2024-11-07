@@ -11,6 +11,7 @@ import PlatformIcons from "./platformIcons";
 import { AddIcon } from "@chakra-ui/icons";
 import cropImage from "../services/imageUrl";
 import { Game } from "../entities/Game";
+import MetacriticBadge from "./MetacriticBadge";
 
 interface Props {
   game: Game;
@@ -41,16 +42,7 @@ function GameCard({ game }: Props) {
       <CardBody flexGrow={1}>
         <HStack justify={"space-between"}>
           <PlatformIcons platforms={game.parent_platforms} />
-          <Badge
-            py={0.5}
-            px={2}
-            rounded={"md"}
-            color={"green.300"}
-            fontSize={"14px"}
-            fontWeight={"700"}
-          >
-            {game.suggestions_count}
-          </Badge>
+         <MetacriticBadge score ={game.metacritic}/>
         </HStack>
         <Heading fontSize={"30px"} lineHeight={"35px"} fontWeight={700} mt={3}>
           {game.name}{" "}

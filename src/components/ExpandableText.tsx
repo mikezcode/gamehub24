@@ -2,16 +2,14 @@ import { Button, Text } from "@chakra-ui/react";
 import React, { ReactNode, useState } from "react";
 
 interface Props {
-  children:string;
+  children: string;
 }
 
-const ExpandableText = ({ children}: Props) => {
+const ExpandableText = ({ children }: Props) => {
   const [expandable, setExpandable] = useState(false);
   const limit = 300;
-  // if (!children) return null;
-  
   if (children.length < limit) return <Text>{children}</Text>;
-  if(!children) return null
+  if (!children) return null;
   const summary = expandable ? children : children.substring(0, 300) + "...";
 
   return (
@@ -22,8 +20,8 @@ const ExpandableText = ({ children}: Props) => {
         color={"black"}
         onClick={() => setExpandable(!expandable)}
         ml={2}
-        size={'xs'}
-        fontWeight={'bold'}
+        size={"xs"}
+        fontWeight={"bold"}
       >
         {expandable ? "Show Less" : "Read More"}
       </Button>
