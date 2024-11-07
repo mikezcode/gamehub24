@@ -22,9 +22,9 @@ class ApiClient<T> {
       .get<FetchDataResponse<T>>(this.endpoint , axiosReqConfig)
       .then((res) => res.data);
   };
-  get = () => {
+  get = (slug:string |number) => {
     return axiosInstance
-      .get<T>(this.endpoint)
+      .get<T>(this.endpoint+'/'+slug)
       .then((res) => res.data);
   };
 }

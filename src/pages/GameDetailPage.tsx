@@ -1,18 +1,17 @@
 import { useParams } from "react-router-dom"
 import useGame from "../hook/useGame"
-import { Heading, Text } from "@chakra-ui/react"
+import { Heading, Spinner, Text } from "@chakra-ui/react"
 
 const GameDetailPage = () => {
 
    const {slug} = useParams()
-   const game = useGame(slug)
-  
-   
-   
-  return (
+   const {data:game,isLoading,error} = useGame(slug!)  
+   if(isLoading) return  <Spinner/>
+   if(error) throw error;
+  return ( 
     <>
-      <Heading>{game.data?.name}</Heading>
-      <Text>{game.data?.description_raw}</Text>
+      <Heading>{game?.name}</Heading>
+      <Text>{game?.description_raw}</Text>
     </>
   );
 }

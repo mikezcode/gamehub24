@@ -16,6 +16,7 @@ import {
 import useGameQueryStore from "../store";
 import Genres from "./genres";
 import SearchInput from "./searchInput";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const { isOpen, onToggle } = useDisclosure();
@@ -24,14 +25,14 @@ const NavBar = () => {
    const setPlatformId = useGameQueryStore((s) => s.setPlatformId);
   const setSearchText = useGameQueryStore((s) => s.setSearchText);
   const setSortOrder = useGameQueryStore((s) => s.setSortOrder);
-
+  const navigate = useNavigate()
 
   return (
-    <Box p={"24px 15px"}>
-      <Flex display={"flex"} align={"center"} m={2} flexWrap={"wrap"}>
+    <Box m={3}>
+      <Flex display={"flex"} align={"center"}  flexWrap={"wrap"}>
         <HStack flexGrow={1} width={{ base: "100%", lg: "auto" }}>
           <Link
-            href="#"
+            // href="/"
             fontSize={"2xl"}
             fontWeight={700}
             _hover={{ textDecoration: "none" }}
@@ -40,6 +41,7 @@ const NavBar = () => {
               setGenreId();
               setPlatformId();
               setSortOrder("");
+              navigate('/')
             }}
           >
             RAWG

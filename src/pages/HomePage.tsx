@@ -14,7 +14,7 @@ function HomePage() {
         lg: `"side main" / 200px 1fr`,
       }}
       justifyContent={"center"}
-      m={3}
+      
     
  
     >
@@ -26,7 +26,7 @@ function HomePage() {
           <Genres />
         </Show>
       </GridItem>
-      <GridItem gridArea={"main"} m={3}>
+      <GridItem gridArea={"main"} >
         <Box>
           <DynamicHeading />
 

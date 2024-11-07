@@ -6,26 +6,11 @@ import {
 import ms from "ms";
 import ApiClient, { FetchDataResponse } from "../services/apiClient";
 import useGameQueryStore from "../store";
-import { Genre } from "./useGenres";
-import { Platform } from "./usePlatforms";
-
-export interface Game {
-  id: number;
-  name: string;
-  background_image: string;
-  genres: Genre[];
-  released: string;
-  parent_platforms: { platform: Platform }[];
-  slug:string;
-  suggestions_count: number;
-  added: number;
-  rating: number;
-  rating_top: number;
-}
+import { Game } from "../entities/Game";
 
 const apiClient = new ApiClient<Game>("/games");
 const useGames = () => {
-  const  gameQuery  = useGameQueryStore(s=>s.gameQuery);
+  const gameQuery = useGameQueryStore((s) => s.gameQuery);
   return useInfiniteQuery<
     FetchDataResponse<Game>,
     Error,
@@ -49,7 +34,7 @@ const useGames = () => {
     },
     // placeholderData: keepPreviousData,
     initialPageParam: 1,
-    staleTime: ms('24h'),
+    staleTime: ms("24h"),
   });
 };
 export default useGames;
