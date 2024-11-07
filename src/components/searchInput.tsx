@@ -2,6 +2,7 @@ import { SearchIcon, CloseIcon } from '@chakra-ui/icons';
 import { InputGroup, InputLeftElement, Input, InputRightElement, useColorModeValue } from '@chakra-ui/react';
 import { useRef, useState } from 'react'
 import useGameQueryStore from '../store';
+import { useNavigate } from 'react-router-dom';
 
  const SearchInput = () => {
 
@@ -9,10 +10,12 @@ import useGameQueryStore from '../store';
   const bg = useColorModeValue("#f1f1f1", "#3a3a3a");
   const [searchInput, setSearchInput] = useState(""); 
   const setSearchText= useGameQueryStore(s=>s.setSearchText)
+  const navigate = useNavigate()
   return (
     <form onSubmit={e=>{
       e.preventDefault()
       setSearchText(searchInput);
+      navigate('/')
     }} >
       <InputGroup
         bg={bg}
