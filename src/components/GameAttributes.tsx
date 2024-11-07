@@ -1,20 +1,34 @@
-import { Badge, Box, Heading, List, ListItem, Text } from "@chakra-ui/react";
-import { Platform } from "../entities/Platform";
-import { Children, ReactNode } from "react";
+import { SimpleGrid, Text } from "@chakra-ui/react";
+import { Game } from "../entities/Game";
+import GameDefinitionItem from "./GameDefinitionItem";
+import MetacriticBadge from "./MetacriticBadge";
 
 interface Props {
-  term: string;
-  children: ReactNode | ReactNode[];
+  game:Game
 }
 
-const GameAttributes = ({ term,children}: Props) => {
+const GameAttributes = ({game}: Props) => {
   return (
-    <Box>
-      <Heading mb={1} fontSize={"2xl"} color={"gray.600"} as={'dt'}>
-        {term}
-      </Heading>
-      {children}
-    </Box>
+    <SimpleGrid columns={2} mt={5} gap={10} as={"dl"}>
+      <GameDefinitionItem term="Platforms">
+        {game?.parent_platforms.map(({ platform }, index) => (
+          <Text key={index}>{platform.name}</Text>
+        ))}
+      </GameDefinitionItem>
+      <GameDefinitionItem term="MetaScore">
+        <MetacriticBadge score={game?.metacritic} />
+      </GameDefinitionItem>
+      <GameDefinitionItem term="Genres">
+        {game?.genres.map((genre) => (
+          <Text key={game.id}>{genre.name}</Text>
+        ))}
+      </GameDefinitionItem>
+      <GameDefinitionItem term="Publishers">
+        {game?.publishers.map((publisher) => (
+          <Text key={game.id}>{publisher.name}</Text>
+        ))}
+      </GameDefinitionItem>
+    </SimpleGrid>
   );
 };
 
