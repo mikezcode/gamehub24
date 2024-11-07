@@ -3,11 +3,13 @@ import ApiClient, { FetchDataResponse } from "../services/apiClient";
 import { Trailer } from "../entities/Trailer";
 import ms from "ms";
 
-const apiClient = new ApiClient<FetchDataResponse<Trailer>>("/games");
 
 const useGameTrailer = (id?: number) =>
-  useQuery({
+  {
+  const apiClient = new ApiClient<Trailer>(`/games/${id}/movies`);  
+  return useQuery({
     queryKey: ["gameTrailer", id],
-    queryFn: () => apiClient.get(`${id}/movies`),
+    queryFn: apiClient.getAll,
   });
+}
 export default useGameTrailer;
