@@ -1,26 +1,24 @@
 import { Box, Flex, Grid, GridItem, Show } from "@chakra-ui/react";
-import "./App.css";
-import DynamicHeading from "./components/dynamicHeading";
-import GameGrid from "./components/gameGrid";
-import Genres from "./components/genres";
-import NavBar from "./components/navBar";
-import { PlatformSelector } from "./components/platformSelector";
-import { SortSelector } from "./components/sortSelector";
-function App() { 
+
+import DynamicHeading from "../components/dynamicHeading";
+import GameGrid from "../components/gameGrid";
+import Genres from "../components/genres";
+import { PlatformSelector } from "../components/platformSelector";
+import { SortSelector } from "../components/sortSelector";
+
+function HomePage() {
   return (
     <Grid
       gridTemplate={{
-        base: `"nav" "main" /1fr`,
-        lg: ` "nav nav" 
-             "side main" / 200px 1fr`,
+        base: `"main" /1fr`,
+        lg: `"side main" / 200px 1fr`,
       }}
-      
       justifyContent={"center"}
       m={3}
     >
-      <GridItem gridArea={"nav"}>
+      {/* <GridItem gridArea={"nav"}>
         <NavBar />
-      </GridItem>
+      </GridItem> */}
       <GridItem gridArea={"side"}>
         <Show above="lg">
           <Genres />
@@ -28,7 +26,7 @@ function App() {
       </GridItem>
       <GridItem gridArea={"main"} m={3}>
         <Box>
-         <DynamicHeading/>
+          <DynamicHeading />
 
           <Flex
             my={5}
@@ -40,10 +38,10 @@ function App() {
             <PlatformSelector />
           </Flex>
         </Box>
-        <GameGrid/>
+        <GameGrid />
       </GridItem>
     </Grid>
   );
 }
 
-export default App;
+export default HomePage;

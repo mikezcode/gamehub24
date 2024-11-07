@@ -3,6 +3,7 @@ import {
   Box,
   Collapse,
   Flex,
+  Hide,
   HStack,
   Link,
   Show,
@@ -48,6 +49,14 @@ const NavBar = () => {
           <Show below="lg">
             <HamburgerIcon cursor={"pointer"} boxSize={8} onClick={onToggle} />
           </Show>
+          <Show above="lg">
+            <Switch
+              colorScheme="green"
+              onChange={toggleColorMode}
+              alignSelf={"center"}
+              ml={3}
+            />
+          </Show>
         </HStack>
       </Flex>
       <Collapse in={isOpen}>
@@ -62,7 +71,7 @@ const NavBar = () => {
         </HStack>
         <VStack
           m={2}
-          p={"2rem"}
+          paddingInline={"2rem"}
           transition={"1s ease-in all"}
           alignItems={"start"}
         >
