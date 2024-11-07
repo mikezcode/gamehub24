@@ -8,13 +8,14 @@ import { Badge, Heading, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import MetacriticBadge from "../components/MetacriticBadge";
 import useGameTrailer from "../hook/useGameTrailer";
 import GameTrailer from "../components/GameTrailer";
+import GameScreenshoots from "../components/GameScreenshoots";
 
 
 
 const GameDetailPage = () => {
   const { slug } = useParams();
   const { data: game, isLoading, error } = useGame(slug!);
-
+ 
   
   if (isLoading) return <Spinner/>;
   if (error) throw error;
@@ -26,6 +27,7 @@ const GameDetailPage = () => {
       <ExpandableText>{game?.description_raw!}</ExpandableText>
       <GameAttributes game={game}/>
       <GameTrailer id= {game?.id}/>
+      <GameScreenshoots id={game?.id}/>
     </>
   );
 };
