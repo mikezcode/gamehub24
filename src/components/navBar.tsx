@@ -3,7 +3,6 @@ import {
   Box,
   Collapse,
   Flex,
-  Hide,
   HStack,
   Link,
   Show,

@@ -26,6 +26,7 @@ import useGameQueryStore from '../store';
           <SearchIcon color={"#181818"} />
         </InputLeftElement>
         <Input
+        placeholder='Search games...'
           bg={bg}
           color={"#898989"}
           borderRadius={"30px"}
