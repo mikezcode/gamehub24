@@ -16,7 +16,7 @@ const GameScreenshoots = ({ id }: Props) => {
   if (!screenshots) return null;
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 2 }} gap={2}>
+    <SimpleGrid columns={{ base: 1, md: 2 }} gap={2} mt={2}>
       {screenshots.map((screenshot) => (
         <Image key={screenshot.id} src={screenshot.image} />
       ))}
