@@ -26,7 +26,10 @@ function GameCard({ game }: Props) {
       boxShadow={"xl"}
       rounded="lg"
       overflow={"hidden"}
-      _hover={{ cursor: "pointer" }}
+      _hover={{
+        transform: "scale(1.05)",
+        transition: "transform 0.2s ease-in-out",
+      }}
     >
       <Image
         h={"15rem"}

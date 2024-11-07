@@ -10,7 +10,7 @@ const DynamicHeading = () => {
   const selected_platform = usePlatform(platformId);
 
   return (
-    <Heading fontSize={"5xl"} textAlign={{ base: "center", lg: "left" }}>
+    <Heading mx={5} fontSize={"5xl"} textAlign={{ base: "center", lg: "left" }}>
       {`${selectedGenre?.name ?? ""}  ${selected_platform?.name ?? ""}  Games`}
     </Heading>
   );

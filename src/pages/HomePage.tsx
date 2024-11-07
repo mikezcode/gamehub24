@@ -15,6 +15,8 @@ function HomePage() {
       }}
       justifyContent={"center"}
       m={3}
+    
+ 
     >
       {/* <GridItem gridArea={"nav"}>
         <NavBar />
@@ -29,7 +31,7 @@ function HomePage() {
           <DynamicHeading />
 
           <Flex
-            my={5}
+            m={5}
             flexWrap={"wrap"}
             gap={2}
             justify={{ base: "center", lg: "start" }}

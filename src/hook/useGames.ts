@@ -16,7 +16,7 @@ export interface Game {
   genres: Genre[];
   released: string;
   parent_platforms: { platform: Platform }[];
-
+  slug:string;
   suggestions_count: number;
   added: number;
   rating: number;
