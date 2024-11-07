@@ -10,7 +10,7 @@ import {
 import PlatformIcons from "./platformIcons";
 import { AddIcon } from "@chakra-ui/icons";
 import cropImage from "../services/imageUrl";
-import { Game } from "../entities/Game";
+import  Game  from "../entities/Game";
 import MetacriticBadge from "./MetacriticBadge";
 
 interface Props {

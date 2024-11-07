@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import platformData from "../data/platformData";
 import ApiClient from "../services/apiClient";
 import ms from "ms";
-import { Platform } from "../entities/Platform";
+import  Platform  from "../entities/Platform";
 const apiClient = new ApiClient<Platform>("/platforms/lists/parents");
 
 const usePlatforms = () =>

@@ -1,7 +1,5 @@
 import { Image, SimpleGrid } from "@chakra-ui/react";
-import React from "react";
 import useScreenshoot from "../hook/useScreenshoot";
-import { th } from "framer-motion/client";
 
 interface Props {
   id?: number;
