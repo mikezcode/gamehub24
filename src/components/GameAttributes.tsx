@@ -4,7 +4,7 @@ import GameDefinitionItem from "./GameDefinitionItem";
 import MetacriticBadge from "./MetacriticBadge";
 
 interface Props {
-  game:Game
+  game?:Game
 }
 
 const GameAttributes = ({game}: Props) => {
@@ -19,13 +19,13 @@ const GameAttributes = ({game}: Props) => {
         <MetacriticBadge score={game?.metacritic} />
       </GameDefinitionItem>
       <GameDefinitionItem term="Genres">
-        {game?.genres.map((genre) => (
-          <Text key={game.id}>{genre.name}</Text>
+        {game?.genres.map((genre,index) => (
+          <Text key={index}>{genre.name}</Text>
         ))}
       </GameDefinitionItem>
       <GameDefinitionItem term="Publishers">
-        {game?.publishers.map((publisher) => (
-          <Text key={game.id}>{publisher.name}</Text>
+        {game?.publishers.map((publisher,index) => (
+          <Text key={index}>{publisher.name}</Text>
         ))}
       </GameDefinitionItem>
     </SimpleGrid>
